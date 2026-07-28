@@ -1,0 +1,44 @@
+---
+import { business } from "../../data/business";
+
+type Props = {
+  href?: string;
+  alt?: string;
+  className?: string;
+};
+
+const { href = "/", alt = business.name, className = "" } = Astro.props;
+---
+
+<a href={href} class:list={["brand-logo", className]} aria-label={alt}>
+  <img
+    src={business.logoPath}
+    alt={alt}
+    width={business.logoWidth}
+    height={business.logoHeight}
+    loading="eager"
+    decoding="async"
+  />
+</a>
+
+<style>
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    text-decoration: none;
+  }
+
+  .brand-logo img {
+    width: clamp(3.35rem, 4vw, 4.75rem);
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media (max-width: 767px) {
+    .brand-logo img {
+      width: clamp(3rem, 11vw, 3.65rem);
+    }
+  }
+</style>

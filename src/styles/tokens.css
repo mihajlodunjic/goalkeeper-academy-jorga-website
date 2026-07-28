@@ -1,0 +1,56 @@
+:root {
+  --color-ink-950: #071523;
+  --color-ink-900: #0c1e32;
+  --color-ink-800: #12304b;
+  --color-blue-600: #2979b2;
+  --color-blue-500: #2f82b9;
+  --color-blue-300: #8fc8e8;
+  --color-paper-50: #f4f7f8;
+  --color-paper-100: #e9eff2;
+  --color-white: #ffffff;
+  --color-text: #102131;
+  --color-text-muted: #526779;
+  --color-border-light: #c8d5dc;
+  --color-border-dark: #28445d;
+  --color-focus: #79c3f0;
+  --color-success: #2e7d63;
+  --color-error: #b94b4b;
+  --font-display: "Roboto Slab", Rockwell, "Times New Roman", serif;
+  --font-body: "Barlow", "Arial Narrow", Arial, sans-serif;
+  --container-max: 76rem;
+  --container-wide: 86rem;
+  --header-height: 5.5rem;
+  --header-height-mobile: 4.5rem;
+  --radius-soft: 1rem;
+  --radius-sharp: 0.35rem;
+  --shadow-panel: 0 1.4rem 3rem rgba(7, 21, 35, 0.14);
+  --section-space: clamp(4rem, 5vw, 7.25rem);
+  --section-dense: clamp(3rem, 4vw, 5rem);
+  --body-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --lead-size: clamp(1.1rem, 1.02rem + 0.35vw, 1.35rem);
+  --display-xl: clamp(3.4rem, 5vw, 4.75rem);
+  --display-page: clamp(2.7rem, 4.35vw, 4rem);
+  --h2-size: clamp(2rem, 3.1vw, 3.25rem);
+  --h3-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.8rem);
+  --small-size: 0.92rem;
+  --label-size: 0.78rem;
+  --navy-overlay: rgba(7, 21, 35, 0.74);
+  --transition-fast: 180ms ease;
+  --transition-medium: 320ms ease;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --display-xl: clamp(2.75rem, 6vw, 3.6rem);
+    --display-page: clamp(2.45rem, 5vw, 3.25rem);
+    --h2-size: clamp(2rem, 4.4vw, 2.75rem);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --display-xl: clamp(2.1rem, 9.5vw, 2.65rem);
+    --display-page: clamp(2.1rem, 8.2vw, 2.55rem);
+    --h2-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+}

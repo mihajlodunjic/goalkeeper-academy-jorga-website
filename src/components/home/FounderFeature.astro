@@ -1,0 +1,83 @@
+---
+import ButtonLink from "../ui/ButtonLink.astro";
+---
+
+<section class="section section--paper">
+  <div class="container-wide founder-feature split-grid">
+    <div class="founder-feature__profile flow reveal">
+      <p class="eyebrow" style="color: var(--color-blue-600)">Osnivač akademije</p>
+      <h2>Bojan Jorgačević</h2>
+      <p class="lead">
+        Iskustvo profesionalnog golmana i reprezentativca Srbije preneto je u rad koji poziciju
+        posmatra tehnički, taktički, fizički i mentalno.
+      </p>
+      <p>
+        Jorgačević je ponikao u FK Rad, branio za Gent, Klub Briž, Kajzeri Erdžijespor i Levski
+        iz Sofije i sedam puta nastupio za seniorsku reprezentaciju Srbije. Kasnije je radio kao
+        trener golmana u prvom timu i mlađim kategorijama Crvene zvezde.
+      </p>
+      <p>
+        U radu akademije cilj nije samo kvalitetnija odbrana. Važni su disciplina, radne navike,
+        odgovornost i ponašanje mladog sportiste na terenu i van njega.
+      </p>
+      <ButtonLink href="/o-akademiji" variant="text">O akademiji i načinu rada</ButtonLink>
+    </div>
+
+    <div class="founder-feature__timeline surface-panel reveal">
+      <p class="founder-feature__label">Karijerna linija</p>
+      <ul>
+        <li>FK Rad</li>
+        <li>Gent</li>
+        <li>Klub Briž</li>
+        <li>Kajzeri Erdžijespor</li>
+        <li>Levski Sofija</li>
+        <li>Reprezentacija Srbije</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .founder-feature__profile p:not(.lead) {
+    color: var(--color-text-muted);
+  }
+
+  .founder-feature__timeline {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .founder-feature__label {
+    margin: 0;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-blue-600);
+  }
+
+  .founder-feature__timeline ul {
+    display: grid;
+    gap: 0.85rem;
+    list-style: none;
+  }
+
+  .founder-feature__timeline li {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--color-border-light);
+    font-family: var(--font-display);
+    font-size: 1.18rem;
+  }
+
+  .founder-feature__timeline li::before {
+    content: "";
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 2px solid var(--color-blue-500);
+    border-radius: 50%;
+  }
+</style>

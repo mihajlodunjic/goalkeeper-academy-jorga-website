@@ -1,0 +1,242 @@
+---
+import { Picture } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/layout/Breadcrumbs.astro";
+import ButtonLink from "../components/ui/ButtonLink.astro";
+import { pageSeo } from "../data/seo";
+import { business } from "../data/business";
+import { methodSequence } from "../data/methodology";
+import { programDetails } from "../data/programs";
+import heroImage from "../assets/images/home/hero-goalkeeper.jpg";
+import groupTraining from "../assets/images/camps/goalkeeper-training-group.jpg";
+---
+
+<BaseLayout
+  seo={pageSeo.programi}
+  currentPath="/programi"
+  bodyClass="page"
+  breadcrumbs={[
+    { href: "/", label: "Početna" },
+    { href: "/programi", label: "Programi" },
+  ]}
+>
+  <section class="section section--dark page-hero">
+    <div class="container-wide flow">
+      <Breadcrumbs items={[{ href: "/", label: "Početna" }, { href: "/programi", label: "Programi" }]} />
+      <p class="eyebrow">Programi Golmanske akademije Jorgačević</p>
+      <h1>Program rada počinje od nivoa golmana, ne od univerzalnog plana.</h1>
+      <p class="lead dark-muted">
+        Početniku, golmanu koji već trenira u klubu i seniorskom igraču nisu potrebne iste
+        korekcije ni isti ritam. Izbor programa polazi od iskustva, cilja i obaveza koje golman
+        već ima.
+      </p>
+      <div class="cluster">
+        <ButtonLink href="/kontakt">Pošalji podatke o golmanu</ButtonLink>
+        <ButtonLink href={business.phones[0].href} variant="secondary">Pozovi za preporuku programa</ButtonLink>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <h2>Izaberite format rada prema zadatku koji rešavate.</h2>
+        <p class="lead muted">
+          Individualni rad donosi precizniju korekciju. Grupa uvodi komunikaciju, reakciju na
+          druge i takmičarski ritam. Škola golmana gradi kontinuitet. Fizička priprema razvija
+          osnovu pokreta. Dodatni rad sa klupskim i seniorskim golmanima usklađuje se sa njihovim
+          takmičarskim obavezama.
+        </p>
+      </div>
+
+      <div class="surface-panel">
+        <Picture
+          src={groupTraining}
+          alt="Golmani tokom grupnog treninga na fudbalskom terenu"
+          widths={[520, 760, 980]}
+          sizes="(min-width: 1040px) 40vw, 100vw"
+          formats={["avif", "webp"]}
+          loading="lazy"
+          decoding="async"
+          class="page-figure"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--muted">
+    <div class="container-wide program-sections">
+      {programDetails.map((program) => (
+        <article id={program.id.replaceAll(" ", "-")} class="program-section surface-panel">
+          <div class="program-section__header">
+            <p class="program-section__meta">{program.metadata}</p>
+            <h2>{program.name}</h2>
+            <p class="lead muted">{program.shortDescription}</p>
+          </div>
+
+          <div class="program-section__body">
+            <div class="flow">
+              {program.description.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+
+            {program.audience ? (
+              <div>
+                <h3>Kome je namenjen</h3>
+                <ul class="stack-list">
+                  {program.audience.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {program.focus ? (
+              <div>
+                <h3>Fokus rada</h3>
+                <ul class="stack-list">
+                  {program.focus.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {program.pathway ? (
+              <div>
+                <h3>Razvojni put</h3>
+                <ul class="stack-list">
+                  {program.pathway.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+
+          <ButtonLink href="/kontakt" variant="text">{program.cta}</ButtonLink>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="proces-rada" class="section section--dark">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <p class="eyebrow">Od situacije do korekcije</p>
+        <h2>Svako ponavljanje mora da ima razlog.</h2>
+        <p class="lead dark-muted">
+          Tehnika se ne odvaja od prostora i odluke. Trener prati šta je golman video, gde je bio
+          postavljen, šta je izabrao i kako je izveo pokret.
+        </p>
+        <ol class="process-list">
+          {methodSequence.steps.map((step) => (
+            <li>
+              <strong>{step.shortLabel}</strong>
+              <span>{step.processBody}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="surface-panel surface-panel--dark">
+        <Picture
+          src={heroImage}
+          alt="Golman u odbrani tokom treninga na fudbalskom terenu"
+          widths={[520, 760, 980]}
+          sizes="(min-width: 1040px) 40vw, 100vw"
+          formats={["avif", "webp"]}
+          loading="lazy"
+          decoding="async"
+          class="page-figure"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <h2>Dodatni rad mora da zna šta se dešava u klubu.</h2>
+        <p>
+          Klupski trening, utakmica, putovanje i oporavak već čine deo nedeljnog opterećenja. Zato
+          je pre dodatnog programa važno znati koliko golman trenira, kada brani i šta trenutno
+          pokušava da unapredi.
+        </p>
+        <p>
+          Cilj nije gomilanje treninga, već sadržaj koji ima jasan zadatak i mesto u postojećem
+          ritmu.
+        </p>
+        <ButtonLink href="/kontakt">Pošalji nedeljni ritam golmana</ButtonLink>
+      </div>
+
+      <div class="flow">
+        <h2>Niste sigurni koji program odgovara?</h2>
+        <p class="lead muted">
+          Pošaljite uzrast, nivo iskustva, trenutni klub ako postoji i cilj dodatnog rada. To je
+          dovoljno za prvi razgovor o odgovarajućem formatu.
+        </p>
+        <div class="cluster">
+          <ButtonLink href="/kontakt">Pošalji podatke o golmanu</ButtonLink>
+          <ButtonLink href={business.phones[0].href} variant="secondary">Pozovi akademiju</ButtonLink>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-figure {
+    width: 100%;
+    border-radius: var(--radius-sharp);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .program-sections {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .program-section {
+    display: grid;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .program-section__meta {
+    margin: 0 0 0.45rem;
+    color: var(--color-blue-600);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .program-section__body {
+    display: grid;
+    gap: 1rem;
+    color: var(--color-text-muted);
+  }
+
+  .process-list {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  .process-list li {
+    display: grid;
+    gap: 0.25rem;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(143, 200, 232, 0.35);
+  }
+
+  .process-list strong {
+    font-size: 0.92rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-blue-300);
+  }
+  </style>

@@ -1,0 +1,158 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/layout/Breadcrumbs.astro";
+import ButtonLink from "../components/ui/ButtonLink.astro";
+import { pageSeo } from "../data/seo";
+import { business } from "../data/business";
+---
+
+<BaseLayout
+  seo={pageSeo.akademija}
+  currentPath="/o-akademiji"
+  bodyClass="page"
+  breadcrumbs={[
+    { href: "/", label: "Početna" },
+    { href: "/o-akademiji", label: "O akademiji" },
+  ]}
+>
+  <section class="section section--dark page-hero">
+    <div class="container-wide flow">
+      <Breadcrumbs items={[{ href: "/", label: "Početna" }, { href: "/o-akademiji", label: "O akademiji" }]} />
+      <p class="eyebrow">Golmanska akademija Jorgačević</p>
+      <h1>Iskustvo sa profesionalnog gola preneto na trening.</h1>
+      <p class="lead dark-muted">
+        Akademiju je osnovao Bojan Jorgačević sa idejom da golmani različitih uzrasta i nivoa
+        dobiju specijalizovan rad koji povezuje tehniku, odluku, fizičku pripremu i sportski
+        karakter.
+      </p>
+      <div class="cluster">
+        <ButtonLink href="/programi">Pogledaj programe</ButtonLink>
+        <ButtonLink href="/kontakt" variant="secondary">Kontaktiraj akademiju</ButtonLink>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <p class="eyebrow" style="color: var(--color-blue-600)">Osnivač</p>
+        <h2>Golmanska karijera kao osnova metodologije.</h2>
+        <p class="lead muted">
+          Bojan Jorgačević ponikao je u FK Rad, a profesionalnu karijeru nastavio u Gentu, Klubu
+          Briž, Kajzeri Erdžijesporu i Levskom iz Sofije. Za seniorsku reprezentaciju Srbije
+          nastupio je sedam puta.
+        </p>
+        <p>
+          Nakon igračke karijere radio je kao trener golmana u prvom timu i mlađim kategorijama
+          Crvene zvezde. Iskustvo iz profesionalnog i reprezentativnog fudbala čini osnovu pristupa
+          kojim akademija posmatra tehniku, prostor, pritisak i odgovornost golmanske pozicije.
+        </p>
+      </div>
+
+      <div class="surface-panel academy-panel">
+        <ul>
+          <li>FK Rad</li>
+          <li>Gent</li>
+          <li>Klub Briž</li>
+          <li>Kajzeri Erdžijespor</li>
+          <li>Levski Sofija</li>
+          <li>7 nastupa za Srbiju</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--muted">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <p class="eyebrow" style="color: var(--color-blue-600)">Od male grupe do šireg programa</p>
+        <h2>Akademija je počela od potrebe za specijalizovanim radom.</h2>
+        <p>
+          Rad je počeo u Beogradu sa manjom grupom golmana. Vremenom su redovni treninzi prošireni
+          različitim formatima individualnog i grupnog rada, fizičkom pripremom, saradnjama sa
+          sportskim organizacijama i kampovima.
+        </p>
+        <p>
+          Kroz akademiju su prolazili početnici, golmani mlađih kategorija, prvotimci i učesnici iz
+          Srbije, regiona i inostranstva. Zajednički imenitelj nije isti uzrast ili iskustvo, već
+          potreba da se golmanska pozicija trenira kao posebna celina.
+        </p>
+      </div>
+
+      <div class="flow">
+        <p class="eyebrow" style="color: var(--color-blue-600)">Četiri principa</p>
+        <h2>Na čemu se zasniva rad akademije.</h2>
+        <div class="stack-list">
+          <article class="surface-panel principle-card">
+            <h3>Specijalizacija</h3>
+            <p>Vežba polazi od stvarne situacije na golu, a ne od univerzalnog sportskog zadatka.</p>
+          </article>
+          <article class="surface-panel principle-card">
+            <h3>Individualna korekcija</h3>
+            <p>Golmani ne prave iste greške i ne napreduju istim ritmom. Korekcija mora da odgovori na ono što konkretan golman radi.</p>
+          </article>
+          <article class="surface-panel principle-card">
+            <h3>Tehnika povezana sa odlukom</h3>
+            <p>Pravilan pokret ima punu vrednost tek kada golman prepozna kada i zašto treba da ga izvede.</p>
+          </article>
+          <article class="surface-panel principle-card">
+            <h3>Disciplina i karakter</h3>
+            <p>Odgovornost, radne navike i ponašanje deo su razvoja mladog sportiste, ne dodatak posle treninga.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <h2>Trening vodi jasan zadatak, ne zbir atraktivnih vežbi.</h2>
+        <p class="dark-muted">
+          Stručni rad akademije organizovan je oko golmanske tehnike, fizičkih zahteva pozicije,
+          donošenja odluka i individualnog praćenja razvoja.
+        </p>
+        <p class="dark-muted">
+          Aktuelni trener, grupa, lokacija i termin određuju se prema programu i dogovoru sa
+          akademijom.
+        </p>
+        <ButtonLink href="/kontakt">Pošalji podatke o golmanu</ButtonLink>
+      </div>
+
+      <div class="flow">
+        <h2>Tražite dodatni golmanski rad u Beogradu?</h2>
+        <p class="lead dark-muted">
+          Pošaljite uzrast, dosadašnje iskustvo i cilj. Akademija će sa vama proveriti koji format
+          rada odgovara trenutnoj situaciji golmana.
+        </p>
+        <div class="cluster">
+          <ButtonLink href="/programi">Pogledaj programe</ButtonLink>
+          <ButtonLink href={business.phones[0].href} variant="secondary">Pozovi akademiju</ButtonLink>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .academy-panel {
+    padding: 1.5rem;
+  }
+
+  .academy-panel ul {
+    display: grid;
+    gap: 0.8rem;
+    list-style: none;
+  }
+
+  .academy-panel li {
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-border-light);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+
+  .principle-card {
+    padding: 1rem;
+  }
+</style>

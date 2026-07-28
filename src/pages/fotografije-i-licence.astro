@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/layout/Breadcrumbs.astro";
+import { pageSeo } from "../data/seo";
+import { photoCredits, requiresPublicPhotoCredits } from "../data/photoCredits";
+
+if (!requiresPublicPhotoCredits) {
+  return Astro.redirect("/");
+}
+---
+
+<BaseLayout
+  seo={pageSeo.photoCredits}
+  currentPath="/fotografije-i-licence"
+  bodyClass="page"
+  breadcrumbs={[
+    { href: "/", label: "Početna" },
+    { href: "/fotografije-i-licence", label: "Fotografije i licence" },
+  ]}
+>
+  <section class="section section--paper">
+    <div class="container-wide flow">
+      <Breadcrumbs
+        items={[
+          { href: "/", label: "Početna" },
+          { href: "/fotografije-i-licence", label: "Fotografije i licence" },
+        ]}
+      />
+      <h1>Fotografije i licence</h1>
+      <p class="lead muted">
+        Pregled spoljnih fotografija koje su lokalno preuzete, optimizovane i korišćene na sajtu.
+      </p>
+      <div class="stack-list">
+        {photoCredits.filter((item) => item.requiresPublicAttribution).map((item) => (
+          <article class="surface-panel credit-card">
+            <h2>{item.title}</h2>
+            <p><strong>Autor:</strong> {item.author}</p>
+            <p><strong>Izvor:</strong> <a href={item.sourceUrl} target="_blank" rel="noreferrer">{item.sourceUrl}</a></p>
+            <p><strong>Licenca:</strong> <a href={item.licenseUrl} target="_blank" rel="noreferrer">{item.licenseName}</a></p>
+            <p><strong>Izmene:</strong> {item.changes}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .credit-card {
+    padding: 1.25rem;
+  }
+</style>

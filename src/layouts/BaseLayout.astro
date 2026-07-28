@@ -1,0 +1,106 @@
+---
+import "@fontsource/roboto-slab/700.css";
+import "@fontsource/roboto-slab/900.css";
+import "@fontsource/barlow/400.css";
+import "@fontsource/barlow/500.css";
+import "@fontsource/barlow/700.css";
+import SiteHeader from "../components/layout/SiteHeader.astro";
+import SiteFooter from "../components/layout/SiteFooter.astro";
+import { business } from "../data/business";
+import type { PageSeo } from "../data/seo";
+
+type BreadcrumbItem = {
+  href: string;
+  label: string;
+};
+
+type Props = {
+  seo: PageSeo;
+  currentPath: string;
+  isHome?: boolean;
+  breadcrumbs?: BreadcrumbItem[];
+  bodyClass?: string;
+};
+
+const { seo, currentPath, isHome = false, breadcrumbs = [], bodyClass = "" } = Astro.props;
+const canonical = new URL(seo.slug, business.siteUrl).toString();
+const ogImage = new URL("/images/social/og-default.png", business.siteUrl).toString();
+
+const organizationStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "SportsOrganization",
+  "@id": `${new URL("/", business.siteUrl).toString()}#organization`,
+  name: business.name,
+  alternateName: business.shortName,
+  url: new URL("/", business.siteUrl).toString(),
+  logo: new URL(business.logoPath, business.siteUrl).toString(),
+  sport: "Football",
+  areaServed: {
+    "@type": "City",
+    name: business.city,
+  },
+  telephone: business.phones.map((phone) => phone.href.replace("tel:", "")),
+  sameAs: [business.instagram.url],
+};
+
+const breadcrumbStructuredData =
+  breadcrumbs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbs.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.label,
+          item: new URL(item.href, business.siteUrl).toString(),
+        })),
+      }
+    : null;
+---
+
+<!doctype html>
+<html lang={business.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <meta name="robots" content={seo.noindex ? "noindex, follow" : "index, follow"} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={business.locale} />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={seo.ogTitle} />
+    <meta property="og:description" content={seo.ogDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={seo.ogTitle} />
+    <meta property="twitter:description" content={seo.ogDescription} />
+    <meta property="twitter:image" content={ogImage} />
+    <meta name="theme-color" content="#071523" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationStructuredData)} />
+    {breadcrumbStructuredData ? (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)} />
+    ) : null}
+  </head>
+  <body class={bodyClass}>
+    <a href="#main-content" class="skip-link">Pređi na glavni sadržaj</a>
+    <SiteHeader currentPath={currentPath} isHome={isHome} />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/base.css";
+</style>

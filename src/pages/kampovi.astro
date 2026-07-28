@@ -1,0 +1,175 @@
+---
+import { Picture } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/layout/Breadcrumbs.astro";
+import ButtonLink from "../components/ui/ButtonLink.astro";
+import { pageSeo } from "../data/seo";
+import { business } from "../data/business";
+import { campsData } from "../data/camps";
+import groupTraining from "../assets/images/camps/goalkeeper-training-group.jpg";
+import groupTrainingMobile from "../assets/images/camps/goalkeeper-training-group-mobile.jpg";
+import trainingGrid from "../assets/images/camps/training-grid.jpg";
+---
+
+<BaseLayout
+  seo={pageSeo.kampovi}
+  currentPath="/kampovi"
+  bodyClass="page"
+  breadcrumbs={[
+    { href: "/", label: "Početna" },
+    { href: "/kampovi", label: "Kampovi" },
+  ]}
+>
+  <section class="section section--dark page-hero">
+    <div class="container-wide flow">
+      <Breadcrumbs items={[{ href: "/", label: "Početna" }, { href: "/kampovi", label: "Kampovi" }]} />
+      <p class="eyebrow">{campsData.pageHero.eyebrow}</p>
+      <h1>{campsData.pageHero.title}</h1>
+      <p class="lead dark-muted">{campsData.pageHero.intro}</p>
+      <div class="cluster">
+        <ButtonLink href="/kontakt">{campsData.pageHero.primaryCta}</ButtonLink>
+        <ButtonLink href={business.instagram.url} variant="secondary" target="_blank" rel="noreferrer">
+          {campsData.pageHero.secondaryCta}
+        </ButtonLink>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <p class="eyebrow" style="color: var(--color-blue-600)">{campsData.rhythm.eyebrow}</p>
+        <h2>{campsData.rhythm.title}</h2>
+        <p class="lead muted">{campsData.rhythm.intro}</p>
+        <div class="stack-list">
+          {campsData.rhythm.items.map((item) => (
+            <article class="surface-panel page-card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="desktop-only">
+        <Picture
+          src={groupTraining}
+          alt={campsData.pageHero.alt}
+          widths={[560, 760, 980, 1200]}
+          sizes="(min-width: 1040px) 42vw, 100vw"
+          formats={["avif", "webp"]}
+          loading="lazy"
+          decoding="async"
+          class="page-figure"
+        />
+      </div>
+      <div class="mobile-only">
+        <Picture
+          src={groupTrainingMobile}
+          alt={campsData.pageHero.alt}
+          widths={[420, 560, 760, 900]}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          loading="lazy"
+          decoding="async"
+          class="page-figure page-figure--portrait"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--muted">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <p class="eyebrow" style="color: var(--color-blue-600)">{campsData.scope.eyebrow}</p>
+        <h2>{campsData.scope.title}</h2>
+        <p class="lead muted">{campsData.scope.intro}</p>
+        <ul class="stack-list">
+          {campsData.scope.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <p class="muted">{campsData.scope.note}</p>
+      </div>
+
+      <Picture
+        src={trainingGrid}
+        alt="Priprema terena za golmanski trening i rad sa koordinacionim lestvama"
+        widths={[500, 760, 980]}
+        sizes="(min-width: 1040px) 40vw, 100vw"
+        formats={["avif", "webp"]}
+        loading="lazy"
+        decoding="async"
+        class="page-figure page-figure--portrait"
+      />
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <h2>{campsData.regionalExperience.title}</h2>
+        {campsData.regionalExperience.paragraphs.map((paragraph) => (
+          <p class="dark-muted">{paragraph}</p>
+        ))}
+        <ButtonLink href={business.instagram.url} variant="secondary" target="_blank" rel="noreferrer">
+          {campsData.regionalExperience.cta}
+        </ButtonLink>
+      </div>
+
+      <div class="flow">
+        <p class="eyebrow">{campsData.checklist.eyebrow}</p>
+        <h2>{campsData.checklist.title}</h2>
+        <p class="lead dark-muted">{campsData.checklist.intro}</p>
+        <ul class="stack-list camp-list">
+          {campsData.checklist.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <ButtonLink href="/kontakt">{campsData.checklist.cta}</ButtonLink>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <h2>{campsData.closing.title}</h2>
+        <p class="lead muted">{campsData.closing.text}</p>
+      </div>
+
+      <div class="cluster">
+        <ButtonLink href="/kontakt">{campsData.closing.primaryCta}</ButtonLink>
+        <ButtonLink href={business.instagram.url} variant="secondary" target="_blank" rel="noreferrer">
+          {campsData.closing.secondaryCta}
+        </ButtonLink>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-figure {
+    width: 100%;
+    border-radius: var(--radius-sharp);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .page-figure--portrait {
+    aspect-ratio: 4 / 5;
+  }
+
+  .page-card {
+    padding: 1rem;
+  }
+
+  .page-card p {
+    color: var(--color-text-muted);
+  }
+
+  .camp-list li {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(143, 200, 232, 0.25);
+  }
+</style>

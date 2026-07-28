@@ -1,0 +1,145 @@
+---
+import { Picture } from "astro:assets";
+import ButtonLink from "../ui/ButtonLink.astro";
+import { methodSequence } from "../../data/methodology";
+import groupTraining from "../../assets/images/camps/goalkeeper-training-group.jpg";
+import groupTrainingMobile from "../../assets/images/camps/goalkeeper-training-group-mobile.jpg";
+---
+
+<section class="section section--dark">
+  <div class="container-wide method-section">
+    <div class="flow reveal">
+      <p class="eyebrow">{methodSequence.eyebrow}</p>
+      <h2>{methodSequence.title}</h2>
+      <p class="lead dark-muted">{methodSequence.intro}</p>
+    </div>
+
+    <div class="method-section__layout">
+      <aside class="method-section__note reveal">
+        <p>{methodSequence.coachNoteLabel}</p>
+        <strong>{methodSequence.coachNote}</strong>
+        <ButtonLink href="/programi#proces-rada" variant="text">{methodSequence.cta}</ButtonLink>
+      </aside>
+
+      <ol class="method-section__steps reveal">
+        {methodSequence.steps.map((step, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>{step.label}</h3>
+              <p>{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="method-section__media reveal">
+        <div class="desktop-only">
+          <Picture
+            src={groupTraining}
+            alt="Golmani tokom grupnog treninga na fudbalskom terenu"
+            widths={[500, 760, 980]}
+            sizes="(min-width: 1040px) 28vw, 100vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+            decoding="async"
+            class="method-section__image"
+          />
+        </div>
+        <div class="mobile-only">
+          <Picture
+            src={groupTrainingMobile}
+            alt="Golmani tokom grupnog treninga na fudbalskom terenu"
+            widths={[420, 560, 760, 900]}
+            sizes="100vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+            decoding="async"
+            class="method-section__image"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .method-section {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .method-section__layout {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .method-section__note {
+    padding: 1.2rem 0 0 1rem;
+    border-left: 2px solid var(--color-blue-500);
+  }
+
+  .method-section__note p {
+    margin: 0 0 0.65rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-blue-300);
+  }
+
+  .method-section__note strong {
+    display: block;
+    max-width: 22rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.45;
+  }
+
+  .method-section__steps {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  .method-section__steps li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(143, 200, 232, 0.2);
+    border-radius: var(--radius-sharp);
+    background: rgba(12, 30, 50, 0.72);
+  }
+
+  .method-section__steps span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid rgba(143, 200, 232, 0.35);
+    color: var(--color-blue-300);
+    font-weight: 700;
+  }
+
+  .method-section__steps p {
+    margin-top: 0.35rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .method-section__image {
+    width: 100%;
+    border-radius: var(--radius-sharp);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1040px) {
+    .method-section__layout {
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.95fr) minmax(0, 0.63fr);
+      align-items: start;
+    }
+  }
+</style>

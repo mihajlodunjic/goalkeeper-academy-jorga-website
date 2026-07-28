@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { pageSeo } from "../data/seo";
+import HomeHero from "../components/home/HomeHero.astro";
+import ProgramIndex from "../components/home/ProgramIndex.astro";
+import MethodSequence from "../components/home/MethodSequence.astro";
+import DevelopmentAreas from "../components/home/DevelopmentAreas.astro";
+import FounderFeature from "../components/home/FounderFeature.astro";
+import CampFeature from "../components/home/CampFeature.astro";
+import ContactBand from "../components/home/ContactBand.astro";
+---
+
+<BaseLayout seo={pageSeo.home} currentPath="/" isHome bodyClass="page page--home">
+  <HomeHero />
+  <ProgramIndex />
+  <MethodSequence />
+  <DevelopmentAreas />
+  <FounderFeature />
+  <CampFeature />
+  <ContactBand />
+</BaseLayout>

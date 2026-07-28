@@ -1,0 +1,79 @@
+---
+type Props = {
+  label: string;
+  note?: string;
+  className?: string;
+};
+
+const { label, note, className = "" } = Astro.props;
+---
+
+<div class:list={["focus-marker", className]} aria-hidden="true">
+  <span class="focus-marker__rings"></span>
+  <span class="focus-marker__line"></span>
+  <span class="focus-marker__copy">
+    <strong>{label}</strong>
+    {note ? <span>{note}</span> : null}
+  </span>
+</div>
+
+<style>
+  .focus-marker {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--color-white);
+  }
+
+  .focus-marker__rings {
+    position: relative;
+    width: 3.4rem;
+    aspect-ratio: 1;
+    border: 1.5px solid rgba(255, 255, 255, 0.88);
+    border-radius: 50%;
+  }
+
+  .focus-marker__rings::before,
+  .focus-marker__rings::after {
+    content: "";
+    position: absolute;
+    inset: 0.35rem;
+    border: 1px solid rgba(143, 200, 232, 0.9);
+    border-radius: 50%;
+  }
+
+  .focus-marker__rings::after {
+    inset: 0.78rem;
+    border-color: rgba(41, 121, 178, 0.9);
+  }
+
+  .focus-marker__line {
+    width: 2.4rem;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  .focus-marker__copy {
+    display: grid;
+    gap: 0.15rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .focus-marker__copy strong {
+    font-family: var(--font-body);
+    font-weight: 700;
+  }
+
+  .focus-marker__copy span {
+    color: var(--color-blue-300);
+  }
+
+  @media (max-width: 767px) {
+    .focus-marker {
+      display: none;
+    }
+  }
+</style>

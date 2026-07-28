@@ -1,0 +1,183 @@
+---
+import { Picture } from "astro:assets";
+import ButtonLink from "../ui/ButtonLink.astro";
+import { programSummaries } from "../../data/programs";
+import programSave from "../../assets/images/programs/program-save.jpg";
+---
+
+<section class="section section--paper">
+  <div class="container-wide split-grid program-index">
+    <div class="flow reveal">
+      <p class="eyebrow" style="color: var(--color-blue-600)">Programi rada</p>
+      <h2>Pet načina rada, jedan fokus — golmanska pozicija.</h2>
+      <p class="lead muted">
+        Od prvih tehničkih elemenata do dodatne pripreme za klupske i seniorske golmane, format rada bira se prema iskustvu, cilju i obavezama na terenu.
+      </p>
+      <ButtonLink href="/programi" variant="text">Prikaži sve programe</ButtonLink>
+    </div>
+
+    <div class="program-index__binder reveal">
+      <div class="program-index__preview desktop-only">
+        <Picture
+          src={programSave}
+          alt="Golman tokom specijalizovane vežbe odbrane na treningu"
+          widths={[420, 640, 900]}
+          sizes="(min-width: 1040px) 28vw, 100vw"
+          formats={["avif", "webp"]}
+          loading="lazy"
+          decoding="async"
+          class="program-index__preview-image"
+        />
+        <p class="program-index__preview-note">Format rada bira se prema iskustvu, cilju i obavezama na terenu.</p>
+      </div>
+
+      <div class="program-index__rows">
+        {programSummaries.map((program, index) => (
+          <details class="program-index__row" open={index === 0}>
+            <summary>
+              <span class="program-index__number">{program.number}</span>
+              <span class="program-index__title-group">
+                <strong>{program.name}</strong>
+                <span>{program.tag}</span>
+              </span>
+            </summary>
+            <div class="program-index__content">
+              <p>{program.summary}</p>
+              <a href={`/programi#${program.slug}`}>{program.linkLabel}</a>
+              <Picture
+                src={programSave}
+                alt="Golman tokom specijalizovane vežbe odbrane na treningu"
+                widths={[540, 760]}
+                sizes="100vw"
+                formats={["avif", "webp"]}
+                loading="lazy"
+                decoding="async"
+                class="program-index__mobile-image mobile-only"
+              />
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .program-index {
+    gap: 2.2rem;
+  }
+
+  .program-index__binder {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .program-index__preview {
+    position: relative;
+    min-height: 19rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-sharp);
+    background: var(--color-ink-950);
+    color: var(--color-white);
+  }
+
+  .program-index__preview-image {
+    width: 100%;
+    border-radius: calc(var(--radius-sharp) - 0.1rem);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .program-index__preview-note {
+    position: absolute;
+    left: 1.2rem;
+    bottom: 1.2rem;
+    max-width: 14rem;
+    margin: 0;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--color-blue-500);
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.92rem;
+  }
+
+  .program-index__rows {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .program-index__row {
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-sharp);
+    background: rgba(255, 255, 255, 0.76);
+    overflow: hidden;
+  }
+
+  .program-index__row summary {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .program-index__row summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .program-index__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--color-blue-500);
+    border-radius: 50%;
+    color: var(--color-blue-600);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .program-index__title-group {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .program-index__title-group strong {
+    font-size: 1.25rem;
+  }
+
+  .program-index__title-group span {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .program-index__content {
+    display: grid;
+    gap: 1rem;
+    padding: 0 1rem 1rem 5rem;
+    color: var(--color-text-muted);
+  }
+
+  .program-index__content a {
+    justify-self: start;
+    color: var(--color-ink-950);
+    font-weight: 700;
+  }
+
+  .program-index__mobile-image {
+    border-radius: var(--radius-sharp);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1040px) {
+    .program-index__binder {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      align-items: start;
+    }
+  }
+</style>

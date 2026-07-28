@@ -1,0 +1,53 @@
+---
+import { Picture } from "astro:assets";
+import ButtonLink from "../ui/ButtonLink.astro";
+import { campsData } from "../../data/camps";
+import trainingGrid from "../../assets/images/camps/training-grid.jpg";
+---
+
+<section class="section section--dark">
+  <div class="container-wide camp-feature split-grid">
+    <div class="camp-feature__media reveal">
+      <Picture
+        src={trainingGrid}
+        alt="Priprema terena za golmanski trening i rad sa koordinacionim lestvama"
+        widths={[500, 760, 980]}
+        sizes="(min-width: 1040px) 44vw, 100vw"
+        formats={["avif", "webp"]}
+        loading="lazy"
+        decoding="async"
+        class="camp-feature__image"
+      />
+    </div>
+
+    <div class="camp-feature__copy flow reveal">
+      <p class="eyebrow">{campsData.home.eyebrow}</p>
+      <h2>{campsData.home.title}</h2>
+      <p class="lead dark-muted">{campsData.home.intro}</p>
+      <ul class="stack-list">
+        {campsData.home.bullets.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+      <ButtonLink href="/kampovi">{campsData.home.cta}</ButtonLink>
+    </div>
+  </div>
+</section>
+
+<style>
+  .camp-feature__image {
+    width: 100%;
+    border-radius: var(--radius-sharp);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .camp-feature ul {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .camp-feature li {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(143, 200, 232, 0.3);
+  }
+</style>

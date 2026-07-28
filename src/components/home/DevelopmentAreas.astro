@@ -1,0 +1,100 @@
+---
+import { Picture } from "astro:assets";
+import ButtonLink from "../ui/ButtonLink.astro";
+import { developmentAreas } from "../../data/methodology";
+import legsImage from "../../assets/images/academy/goalkeeper-legs.jpg";
+---
+
+<section class="section section--muted">
+  <div class="container-wide areas-layout">
+    <div class="flow reveal">
+      <p class="eyebrow" style="color: var(--color-blue-600)">Sadržaj treninga</p>
+      <h2>{developmentAreas.title}</h2>
+      <p class="lead muted">{developmentAreas.intro}</p>
+      <ButtonLink href="/programi" variant="text">{developmentAreas.cta}</ButtonLink>
+    </div>
+
+    <div class="areas-layout__content reveal">
+      <div class="areas-layout__lead-areas">
+        {developmentAreas.areas.slice(0, 3).map((area) => (
+          <article>
+            <h3>{area.title}</h3>
+            <p>{area.body}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="areas-layout__side">
+        <Picture
+          src={legsImage}
+          alt="Golman tokom pripreme i rada u golmanskoj opremi"
+          widths={[360, 540, 720]}
+          sizes="(min-width: 1040px) 20vw, 100vw"
+          formats={["avif", "webp"]}
+          loading="lazy"
+          decoding="async"
+          class="areas-layout__image"
+        />
+
+        <div class="areas-layout__stack">
+          {developmentAreas.areas.slice(3).map((area) => (
+            <article>
+              <h3>{area.title}</h3>
+              <p>{area.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .areas-layout {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .areas-layout__content {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .areas-layout__lead-areas,
+  .areas-layout__stack {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .areas-layout article {
+    padding: 1rem 0 1rem 1rem;
+    border-left: 2px solid var(--color-border-light);
+  }
+
+  .areas-layout h3 {
+    margin-bottom: 0.35rem;
+  }
+
+  .areas-layout p {
+    color: var(--color-text-muted);
+  }
+
+  .areas-layout__side {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .areas-layout__image {
+    width: 100%;
+    border-radius: var(--radius-sharp);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1040px) {
+    .areas-layout__content {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.72fr);
+      gap: 2rem;
+    }
+  }
+</style>

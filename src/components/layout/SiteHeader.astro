@@ -1,0 +1,337 @@
+---
+import BrandLogo from "../brand/BrandLogo.astro";
+import ButtonLink from "../ui/ButtonLink.astro";
+import { business } from "../../data/business";
+import { navigation } from "../../data/navigation";
+
+type Props = {
+  currentPath: string;
+  isHome?: boolean;
+};
+
+const { currentPath, isHome = false } = Astro.props;
+const primaryPhone = business.phones[0];
+---
+
+<header class:list={["site-header", isHome && "site-header--home"]} data-site-header>
+  <div class="container-wide site-header__inner">
+    <BrandLogo />
+
+    <nav class="site-header__nav" aria-label="Glavna navigacija">
+      <ul>
+        {navigation.map((item) => (
+          <li>
+            <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__cta">
+      <ButtonLink href={primaryPhone.href} ariaLabel={`Pozovi akademiju na ${primaryPhone.display}`}>
+        Pozovi za termin
+      </ButtonLink>
+    </div>
+
+    <button
+      class="site-header__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-navigation-panel"
+      aria-label="Otvori navigaciju"
+      data-menu-toggle
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="site-header__overlay" hidden data-mobile-overlay></div>
+
+  <aside
+    id="mobile-navigation-panel"
+    class="site-header__panel"
+    aria-label="Glavna navigacija"
+    hidden
+    data-mobile-panel
+  >
+    <nav aria-label="Glavna navigacija">
+      <ul>
+        {navigation.map((item) => (
+          <li>
+            <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined} data-mobile-link>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__panel-contact">
+      <p class="site-header__panel-label">Direktan kontakt</p>
+      <a href={business.phones[0].href}>{business.phones[0].display}</a>
+      <a href={business.phones[1].href}>{business.phones[1].display}</a>
+      <a href={business.instagram.url} target="_blank" rel="noreferrer">Instagram</a>
+    </div>
+
+    <ButtonLink href={primaryPhone.href} className="site-header__panel-cta">
+      Pozovi za termin
+    </ButtonLink>
+  </aside>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-site-header]");
+  const toggle = header?.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const panel = header?.querySelector<HTMLElement>("[data-mobile-panel]");
+  const overlay = header?.querySelector<HTMLElement>("[data-mobile-overlay]");
+  const links = panel ? [...panel.querySelectorAll("[data-mobile-link]")] : [];
+  let lastFocused: HTMLElement | null = null;
+
+  const setScrolled = () => {
+    if (!header) return;
+    const isHome = header.classList.contains("site-header--home");
+    header.classList.toggle("is-scrolled", !isHome || window.scrollY > 24);
+  };
+
+  const focusableSelector =
+    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+  const closeMenu = () => {
+    if (!toggle || !panel || !overlay) return;
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Otvori navigaciju");
+    panel.hidden = true;
+    overlay.hidden = true;
+    document.body.classList.remove("menu-open");
+    document.removeEventListener("keydown", onKeydown);
+    if (lastFocused instanceof HTMLElement) {
+      lastFocused.focus();
+    } else {
+      toggle.focus();
+    }
+  };
+
+  const trapFocus = (event: KeyboardEvent) => {
+    if (event.key !== "Tab" || !panel || panel.hidden) return;
+    const focusable = [...panel.querySelectorAll<HTMLElement>(focusableSelector)].filter(
+      (element) => !element.hidden
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    }
+
+    if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
+  const onKeydown = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      closeMenu();
+      return;
+    }
+    trapFocus(event);
+  };
+
+  const openMenu = () => {
+    if (!toggle || !panel || !overlay) return;
+    lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Zatvori navigaciju");
+    panel.hidden = false;
+    overlay.hidden = false;
+    document.body.classList.add("menu-open");
+    document.addEventListener("keydown", onKeydown);
+    const firstFocusable = panel.querySelector(focusableSelector);
+    if (firstFocusable instanceof HTMLElement) {
+      firstFocusable.focus();
+    }
+  };
+
+  if (toggle && panel && overlay) {
+    toggle.addEventListener("click", () => {
+      if (panel.hidden) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    });
+
+    overlay.addEventListener("click", closeMenu);
+    links.forEach((link) => link.addEventListener("click", closeMenu));
+  }
+
+  setScrolled();
+  window.addEventListener("scroll", setScrolled, { passive: true });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1200;
+    border-bottom: 1px solid transparent;
+    background: rgba(7, 21, 35, 0.98);
+    transition:
+      background-color var(--transition-medium),
+      border-color var(--transition-medium);
+  }
+
+  .site-header--home {
+    background: transparent;
+  }
+
+  .site-header.is-scrolled {
+    border-color: rgba(143, 200, 232, 0.16);
+    background: rgba(7, 21, 35, 0.97);
+  }
+
+  .site-header__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 1.5rem;
+    align-items: center;
+    min-height: var(--header-height);
+  }
+
+  .site-header__nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.4rem;
+    list-style: none;
+  }
+
+  .site-header__nav a,
+  .site-header__panel a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .site-header__nav a[aria-current="page"],
+  .site-header__panel a[aria-current="page"] {
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid var(--color-blue-500);
+  }
+
+  .site-header__toggle,
+  .site-header__overlay,
+  .site-header__panel {
+    display: none;
+  }
+
+  @media (max-width: 1023px) {
+    .site-header__inner {
+      grid-template-columns: auto 1fr auto;
+      min-height: var(--header-height-mobile);
+    }
+
+    .site-header__nav,
+    .site-header__cta {
+      display: none;
+    }
+
+    .site-header__toggle {
+      display: inline-grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: var(--color-white);
+    }
+
+    .site-header__toggle span {
+      display: block;
+      width: 1.3rem;
+      height: 2px;
+      border-radius: 1px;
+      background: currentColor;
+      transition:
+        transform var(--transition-fast),
+        opacity var(--transition-fast);
+    }
+
+    .site-header__toggle span:nth-child(2) {
+      margin-block: 0.27rem;
+    }
+
+    .site-header__toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(0.39rem) rotate(45deg);
+    }
+
+    .site-header__toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-header__toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-0.39rem) rotate(-45deg);
+    }
+
+    .site-header__overlay {
+      position: fixed;
+      inset: 0;
+      display: block;
+      background: rgba(4, 13, 22, 0.56);
+    }
+
+    .site-header__panel {
+      position: fixed;
+      inset: 0 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      width: min(92vw, 24rem);
+      padding: 5.5rem 1.2rem 1.5rem;
+      background: var(--color-ink-950);
+      color: var(--color-white);
+      border-left: 1px solid rgba(143, 200, 232, 0.18);
+    }
+
+    .site-header__panel ul {
+      display: grid;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    .site-header__panel a {
+      display: inline-flex;
+      min-height: 2.8rem;
+      align-items: center;
+      font-size: 1.15rem;
+    }
+
+    .site-header__panel-contact {
+      display: grid;
+      gap: 0.6rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(143, 200, 232, 0.18);
+    }
+
+    .site-header__panel-label {
+      margin: 0;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-blue-300);
+    }
+
+    .site-header__panel-cta {
+      margin-top: auto;
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+import ButtonLink from "../ui/ButtonLink.astro";
+import { business } from "../../data/business";
+---
+
+<section class="section section--muted">
+  <div class="container-wide contact-band surface-panel">
+    <div class="contact-band__copy flow">
+      <p class="eyebrow" style="color: var(--color-blue-600)">Prvi korak</p>
+      <h2>Prvo odredimo nivo, cilj i obaveze golmana.</h2>
+      <p class="lead muted">
+        Pošaljite uzrast, dosadašnje iskustvo, trenutni klub ako ga golman ima i razlog zbog kog
+        tražite dodatni rad. Na osnovu tih informacija razgovor može odmah da krene od
+        odgovarajućeg programa.
+      </p>
+      <div class="cluster">
+        <ButtonLink href="/kontakt">Pošalji podatke o golmanu</ButtonLink>
+        <ButtonLink href={business.instagram.url} variant="secondary" target="_blank" rel="noreferrer">
+          Otvori Instagram profil
+        </ButtonLink>
+      </div>
+    </div>
+
+    <div class="contact-band__details">
+      <article>
+        <p>Pozovite</p>
+        <a href={business.phones[0].href}>{business.phones[0].display}</a>
+      </article>
+      <article>
+        <p>Drugi kontakt</p>
+        <a href={business.phones[1].href}>{business.phones[1].display}</a>
+      </article>
+      <article>
+        <p>Aktuelne objave</p>
+        <a href={business.instagram.url} target="_blank" rel="noreferrer">Instagram</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-band {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .contact-band__details {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .contact-band__details article {
+    padding: 1rem;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-sharp);
+    background: rgba(255, 255, 255, 0.88);
+  }
+
+  .contact-band__details p {
+    margin: 0 0 0.45rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-blue-600);
+  }
+
+  .contact-band__details a {
+    color: var(--color-ink-950);
+    font-size: 1.12rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  @media (min-width: 960px) {
+    .contact-band {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+      align-items: center;
+    }
+  }
+</style>

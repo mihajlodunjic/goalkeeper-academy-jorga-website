@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/layout/Breadcrumbs.astro";
+import ButtonLink from "../components/ui/ButtonLink.astro";
+import { pageSeo } from "../data/seo";
+import { business } from "../data/business";
+---
+
+<BaseLayout
+  seo={pageSeo.kontakt}
+  currentPath="/kontakt"
+  bodyClass="page"
+  breadcrumbs={[
+    { href: "/", label: "Početna" },
+    { href: "/kontakt", label: "Kontakt" },
+  ]}
+>
+  <section class="section section--dark page-hero">
+    <div class="container-wide contact-hero">
+      <div class="flow">
+        <Breadcrumbs items={[{ href: "/", label: "Početna" }, { href: "/kontakt", label: "Kontakt" }]} />
+        <p class="eyebrow">Kontakt i prvi upit</p>
+        <h1>Za preporuku programa potrebne su četiri informacije.</h1>
+        <p class="lead dark-muted">
+          Pošaljite uzrast golmana, dosadašnje iskustvo, trenutni klub ako postoji i cilj dodatnog
+          rada. Na osnovu toga razgovor može odmah da bude konkretan.
+        </p>
+        <div class="cluster">
+          <ButtonLink href="#podaci-direktno">Pošalji upit</ButtonLink>
+          <ButtonLink href={business.phones[0].href} variant="secondary">Pozovi akademiju</ButtonLink>
+        </div>
+      </div>
+
+      <div class="surface-panel surface-panel--dark contact-hero__panel">
+        <p>Telefon</p>
+        <a href={business.phones[0].href}>{business.phones[0].display}</a>
+        <p>Drugi telefon</p>
+        <a href={business.phones[1].href}>{business.phones[1].display}</a>
+        <p>Zvanični Instagram profil</p>
+        <a href={business.instagram.url} target="_blank" rel="noreferrer">{business.instagram.handle}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <h2>Razgovarajte direktno sa akademijom.</h2>
+        <p class="lead muted">
+          Aktuelne objave o treninzima, saradnjama i kampovima pratite na zvaničnom Instagram
+          profilu.
+        </p>
+        <div class="stack-list">
+          <article class="surface-panel contact-card">
+            <p>Telefon</p>
+            <a href={business.phones[0].href}>Pozovi +381 66 188 478</a>
+          </article>
+          <article class="surface-panel contact-card">
+            <p>Drugi telefon</p>
+            <a href={business.phones[1].href}>Pozovi +381 66 000 999</a>
+          </article>
+          <article class="surface-panel contact-card">
+            <p>Zvanični Instagram profil</p>
+            <a href={business.instagram.url} target="_blank" rel="noreferrer">Otvori Instagram</a>
+          </article>
+        </div>
+      </div>
+
+      <div id="podaci-direktno" class="surface-panel contact-assessment flow">
+        <h2>Pošaljite podatke direktno.</h2>
+        <p>
+          Pripremite uzrast, iskustvo, trenutni klub ako postoji i cilj dodatnog rada, a zatim
+          pozovite akademiju.
+        </p>
+        <ol>
+          <li>Uzrast golmana</li>
+          <li>Dosadašnje iskustvo</li>
+          <li>Trenutni klub ako postoji</li>
+          <li>Cilj dodatnog rada</li>
+        </ol>
+        <p class="muted">
+          Podaci iz forme koriste se samo za odgovor na vaš upit i ne predstavljaju automatsku
+          potvrdu termina.
+        </p>
+        <div class="cluster">
+          <ButtonLink href={business.phones[0].href}>Pozovi +381 66 188 478</ButtonLink>
+          <ButtonLink href={business.phones[1].href} variant="secondary">Pozovi +381 66 000 999</ButtonLink>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--muted">
+    <div class="container-wide split-grid">
+      <div class="flow">
+        <p class="eyebrow" style="color: var(--color-blue-600)">Područje rada</p>
+        <h2>Treninzi u Beogradu i kampovi na različitim lokacijama.</h2>
+        <p class="lead muted">
+          Tačan teren i termin zavise od programa, grupe i aktuelne organizacije rada. Lokaciju
+          proverite direktno sa akademijom pre dolaska.
+        </p>
+      </div>
+
+      <div class="cluster">
+        <ButtonLink href={business.phones[0].href}>Pozovi za lokaciju i termin</ButtonLink>
+        <ButtonLink href={business.instagram.url} variant="secondary" target="_blank" rel="noreferrer">
+          Otvori Instagram profil
+        </ButtonLink>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-hero {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .contact-hero__panel,
+  .contact-card,
+  .contact-assessment {
+    padding: 1.25rem;
+  }
+
+  .contact-hero__panel p,
+  .contact-card p {
+    margin: 0 0 0.35rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-blue-300);
+  }
+
+  .contact-hero__panel a,
+  .contact-card a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1.08rem;
+    font-weight: 700;
+  }
+
+  .contact-card a {
+    color: var(--color-ink-950);
+  }
+
+  .contact-assessment ol {
+    padding-left: 1.2rem;
+  }
+
+  @media (min-width: 1040px) {
+    .contact-hero {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      align-items: start;
+    }
+  }
+</style>

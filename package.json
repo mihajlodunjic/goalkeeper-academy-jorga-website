@@ -1,0 +1,25 @@
+{
+  "name": "goalkeeper-academy-jorga-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "prepare:assets": "node ./src/scripts/prepare-assets.mjs",
+    "check": "astro check",
+    "build": "astro check && astro build",
+    "build:strict": "node ./src/scripts/validate-site-url.mjs && astro check && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.3.2",
+    "@fontsource/barlow": "^5.2.8",
+    "@fontsource/roboto-slab": "^5.2.7",
+    "astro": "^5.14.3",
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^5.9.3"
+  }
+}

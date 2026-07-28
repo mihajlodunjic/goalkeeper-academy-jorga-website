@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ButtonLink from "../components/ui/ButtonLink.astro";
+import { pageSeo } from "../data/seo";
+---
+
+<BaseLayout seo={pageSeo.notFound} currentPath="/404" bodyClass="page">
+  <section class="section section--dark not-found">
+    <div class="container flow">
+      <p class="eyebrow">Greška 404</p>
+      <h1>Ova putanja nije u terenu.</h1>
+      <p class="lead dark-muted">Stranica koju tražite ne postoji ili je promenila adresu.</p>
+      <div class="cluster">
+        <ButtonLink href="/">Vrati se na početnu</ButtonLink>
+        <ButtonLink href="/programi" variant="secondary">Pogledaj programe</ButtonLink>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: calc(100svh - var(--header-height));
+    display: grid;
+    align-items: center;
+  }
+</style>
