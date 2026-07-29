@@ -1,0 +1,510 @@
+---
+import glovesAsset from "../../assets/game/goalkeeper_gloves.png";
+---
+
+<section class="section section--dark goalkeeper-game-section">
+  <div class="container-wide goalkeeper-game">
+    <div class="goalkeeper-game__meta flow reveal">
+      <p class="eyebrow">Mini igra · Stani na gol</p>
+      <h2>Koliko šuteva možeš da odbraniš?</h2>
+      <p class="lead dark-muted">
+        Pomeraj rukavice unutar gola i pokušaj da zaustaviš svaki udarac. Pravac i visina šuta
+        menjaju se nasumično.
+      </p>
+
+      <div class="goalkeeper-game__instruction-block">
+        <p class="goalkeeper-game__instruction goalkeeper-game__instruction--desktop">
+          Uđi kursorom u teren i pomeraj rukavice.
+        </p>
+        <p class="goalkeeper-game__instruction goalkeeper-game__instruction--mobile">
+          Dodirni teren, zatim pomeraj rukavice prstom.
+        </p>
+      </div>
+
+      <div class="goalkeeper-game__scoreboard" role="group" aria-label="Rezultat mini igre">
+        <article class="goalkeeper-game__scorecard">
+          <span>Odbrane</span>
+          <strong data-game-saves aria-label="Odbrane: 0">0</strong>
+        </article>
+        <article class="goalkeeper-game__scorecard goalkeeper-game__scorecard--alert">
+          <span>Primljeni golovi</span>
+          <strong data-game-goals aria-label="Primljeni golovi: 0">0</strong>
+        </article>
+      </div>
+
+      <p class="goalkeeper-game__status" data-game-status>Uđi kursorom u teren i pomeraj rukavice.</p>
+
+      <div class="goalkeeper-game__controls" hidden data-game-controls>
+        <button class="goalkeeper-game__action" type="button" hidden data-game-start>
+          Pokreni igru
+        </button>
+        <button class="goalkeeper-game__action goalkeeper-game__action--secondary" type="button" hidden data-game-pause>
+          Pauziraj igru
+        </button>
+        <button class="goalkeeper-game__action" type="button" hidden data-game-resume>
+          Nastavi igru
+        </button>
+      </div>
+
+      <p class="visually-hidden" aria-live="polite" data-game-live></p>
+    </div>
+
+    <div class="goalkeeper-game__arena reveal" data-goalkeeper-mini-game>
+      <div
+        class="goalkeeper-game__surface"
+        tabindex="0"
+        aria-label="Mini igra odbrane šuteva. Pomeraj rukavice unutar gola mišem, dodirom ili tastaturom."
+        data-game-surface
+      >
+        <div class="goalkeeper-game__shooting-lane" aria-hidden="true"></div>
+        <div class="goalkeeper-game__penalty-area" aria-hidden="true"></div>
+        <div class="goalkeeper-game__six-yard-box" aria-hidden="true"></div>
+        <div class="goalkeeper-game__goal" data-game-goal aria-hidden="true">
+          <div class="goalkeeper-game__goal-net"></div>
+        </div>
+        <div class="goalkeeper-game__shot-origin" data-game-origin aria-hidden="true"></div>
+
+        <img
+          class="goalkeeper-game__gloves"
+          src={glovesAsset.src}
+          width={glovesAsset.width}
+          height={glovesAsset.height}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+          data-game-gloves
+        />
+
+        <div class="goalkeeper-game__ball" hidden data-game-ball aria-hidden="true">
+          <svg viewBox="0 0 64 64" focusable="false" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" fill="#f7fbff" stroke="#0f2235" stroke-width="2.6"></circle>
+            <polygon points="32,14 23,21 26,32 38,32 41,21" fill="#0f2235"></polygon>
+            <polygon points="18,25 11,29 14,41 24,38 23,27" fill="#0f2235"></polygon>
+            <polygon points="46,25 41,27 40,38 50,41 53,29" fill="#0f2235"></polygon>
+            <polygon points="27,37 19,41 22,51 32,47 32,39" fill="#0f2235"></polygon>
+            <polygon points="37,39 37,47 47,51 50,41 42,37" fill="#0f2235"></polygon>
+          </svg>
+        </div>
+
+        <div class="goalkeeper-game__impact" hidden data-game-impact aria-hidden="true"></div>
+        <div class="goalkeeper-game__feedback" hidden data-game-feedback aria-hidden="true"></div>
+
+        <div class="goalkeeper-game__overlay" data-game-overlay>
+          <p class="goalkeeper-game__overlay-text" data-game-overlay-text>
+            Uđi kursorom u teren i pomeraj rukavice.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import "../../scripts/goalkeeper-game";
+  </script>
+</section>
+
+<style>
+  .goalkeeper-game-section {
+    position: relative;
+    overflow: clip;
+    background:
+      linear-gradient(180deg, rgba(143, 200, 232, 0.04), rgba(143, 200, 232, 0)),
+      var(--color-ink-950);
+  }
+
+  .goalkeeper-game {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .goalkeeper-game__meta,
+  .goalkeeper-game__arena {
+    min-width: 0;
+  }
+
+  .goalkeeper-game__instruction-block {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .goalkeeper-game__instruction {
+    margin: 0;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(143, 200, 232, 0.26);
+    color: rgba(255, 255, 255, 0.82);
+    font-weight: 600;
+  }
+
+  .goalkeeper-game__instruction--desktop {
+    display: none;
+  }
+
+  .goalkeeper-game__scoreboard {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .goalkeeper-game__scorecard {
+    display: grid;
+    gap: 0.55rem;
+    padding: 1rem;
+    border: 1px solid rgba(143, 200, 232, 0.2);
+    border-radius: 0.72rem;
+    background: rgba(12, 30, 50, 0.74);
+  }
+
+  .goalkeeper-game__scorecard span {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-blue-300);
+  }
+
+  .goalkeeper-game__scorecard strong {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.35rem + 2vw, 3.15rem);
+    line-height: 0.95;
+    color: var(--color-white);
+  }
+
+  .goalkeeper-game__scorecard--alert strong {
+    color: #f2c9c9;
+  }
+
+  .goalkeeper-game__status {
+    margin: 0;
+    min-height: 1.6rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 600;
+  }
+
+  .goalkeeper-game__controls {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .goalkeeper-game__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.8rem 1.15rem;
+    border: 1px solid var(--color-blue-500);
+    border-radius: 0.6rem;
+    background: var(--color-blue-600);
+    color: var(--color-white);
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .goalkeeper-game__action:hover {
+    transform: translateY(-1px);
+    background: var(--color-blue-500);
+  }
+
+  .goalkeeper-game__action--secondary {
+    border-color: rgba(255, 255, 255, 0.24);
+    background: transparent;
+  }
+
+  .goalkeeper-game__action--secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .goalkeeper-game__surface {
+    position: relative;
+    isolation: isolate;
+    min-width: 0;
+    height: clamp(27rem, 78vw, 32.5rem);
+    overflow: hidden;
+    border: 1px solid rgba(143, 200, 232, 0.16);
+    border-radius: 1.15rem;
+    background:
+      radial-gradient(circle at center bottom, rgba(41, 121, 178, 0.14), transparent 40%),
+      linear-gradient(180deg, rgba(7, 21, 35, 0.92), rgba(7, 21, 35, 0.98)),
+      var(--color-ink-900);
+    touch-action: none;
+  }
+
+  .goalkeeper-game__surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, transparent 0, transparent 14%, rgba(143, 200, 232, 0.06) 14%, transparent 14.5%, transparent 85.5%, rgba(143, 200, 232, 0.06) 86%, transparent 86.5%),
+      linear-gradient(to bottom, transparent 0, transparent 11%, rgba(143, 200, 232, 0.06) 11.25%, transparent 11.5%);
+    pointer-events: none;
+  }
+
+  .goalkeeper-game__surface:focus-visible {
+    outline: 0.16rem solid var(--color-focus);
+    outline-offset: 0.25rem;
+  }
+
+  .goalkeeper-game__shooting-lane,
+  .goalkeeper-game__penalty-area,
+  .goalkeeper-game__six-yard-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid rgba(143, 200, 232, 0.16);
+    pointer-events: none;
+  }
+
+  .goalkeeper-game__shooting-lane {
+    bottom: 10%;
+    width: min(58%, 25rem);
+    height: 36%;
+    border-bottom: none;
+    border-radius: 0.75rem 0.75rem 0 0;
+  }
+
+  .goalkeeper-game__penalty-area {
+    bottom: 16%;
+    width: min(76%, 35rem);
+    height: 48%;
+    border-bottom: none;
+    border-radius: 0.9rem 0.9rem 0 0;
+  }
+
+  .goalkeeper-game__six-yard-box {
+    bottom: 28%;
+    width: min(44%, 18rem);
+    height: 20%;
+    border-bottom: none;
+    border-radius: 0.75rem 0.75rem 0 0;
+  }
+
+  .goalkeeper-game__goal {
+    position: absolute;
+    top: 9%;
+    left: 8%;
+    width: 84%;
+    height: 54%;
+    border-top: 0.45rem solid rgba(245, 249, 252, 0.92);
+    border-left: 0.45rem solid rgba(245, 249, 252, 0.92);
+    border-right: 0.45rem solid rgba(245, 249, 252, 0.92);
+    border-radius: 0.35rem 0.35rem 0 0;
+    pointer-events: none;
+  }
+
+  .goalkeeper-game__goal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0.2rem 0.2rem 0 0;
+    box-shadow: inset 0 0 0 1px rgba(7, 21, 35, 0.22);
+  }
+
+  .goalkeeper-game__goal-net {
+    position: absolute;
+    inset: 0.25rem 0.3rem 0;
+    background:
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent),
+      repeating-linear-gradient(
+        to right,
+        rgba(143, 200, 232, 0.15) 0,
+        rgba(143, 200, 232, 0.15) 1px,
+        transparent 1px,
+        transparent 12%
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(143, 200, 232, 0.12) 0,
+        rgba(143, 200, 232, 0.12) 1px,
+        transparent 1px,
+        transparent 18%
+      );
+    opacity: 0.82;
+  }
+
+  .goalkeeper-game__goal.is-goal-hit .goalkeeper-game__goal-net {
+    animation: goalkeeper-game-net-shake 220ms ease-out;
+  }
+
+  .goalkeeper-game__shot-origin {
+    position: absolute;
+    left: 50%;
+    bottom: 9.5%;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 2px solid rgba(143, 200, 232, 0.52);
+    border-radius: 50%;
+    background: rgba(7, 21, 35, 0.88);
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 0.35rem rgba(143, 200, 232, 0.06);
+    pointer-events: none;
+  }
+
+  .goalkeeper-game__gloves,
+  .goalkeeper-game__ball,
+  .goalkeeper-game__impact,
+  .goalkeeper-game__feedback,
+  .goalkeeper-game__overlay {
+    position: absolute;
+  }
+
+  .goalkeeper-game__gloves {
+    left: 0;
+    top: 0;
+    z-index: 4;
+    width: 9rem;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    transform: translate3d(0, 0, 0);
+    will-change: transform, width;
+  }
+
+  .goalkeeper-game__ball {
+    left: 0;
+    top: 0;
+    z-index: 3;
+    width: 2.5rem;
+    height: 2.5rem;
+    transform: translate3d(-999px, -999px, 0);
+    transform-origin: center;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  .goalkeeper-game__ball svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .goalkeeper-game__impact {
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 2.8rem;
+    height: 2.8rem;
+    border: 2px solid rgba(143, 200, 232, 0.58);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .goalkeeper-game__impact.is-active {
+    animation: goalkeeper-game-impact 220ms ease-out;
+  }
+
+  .goalkeeper-game__feedback {
+    top: 1rem;
+    left: 50%;
+    z-index: 5;
+    min-width: 7.4rem;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgba(143, 200, 232, 0.22);
+    border-radius: 0.72rem;
+    background: rgba(7, 21, 35, 0.88);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .goalkeeper-game__feedback[data-outcome="save"] {
+    color: #8fd6c2;
+  }
+
+  .goalkeeper-game__feedback[data-outcome="goal"] {
+    color: #efb2b2;
+  }
+
+  .goalkeeper-game__overlay {
+    inset: auto 1rem 1rem;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .goalkeeper-game__overlay-text {
+    margin: 0;
+    max-width: 26rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(143, 200, 232, 0.14);
+    border-radius: 0.72rem;
+    background: rgba(7, 21, 35, 0.76);
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .goalkeeper-game__overlay.is-hidden {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .goalkeeper-game__instruction--desktop {
+      display: block;
+    }
+
+    .goalkeeper-game__instruction--mobile {
+      display: none;
+    }
+
+    .goalkeeper-game__surface {
+      height: clamp(30rem, 58vw, 35rem);
+    }
+  }
+
+  @media (min-width: 1040px) {
+    .goalkeeper-game {
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+      gap: 2.25rem;
+    }
+
+    .goalkeeper-game__surface {
+      height: clamp(32.5rem, 42vw, 38.75rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .goalkeeper-game__goal.is-goal-hit .goalkeeper-game__goal-net,
+    .goalkeeper-game__impact.is-active {
+      animation: none;
+    }
+  }
+
+  @keyframes goalkeeper-game-impact {
+    0% {
+      opacity: 0.92;
+      transform: scale(0.72);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(1.55);
+    }
+  }
+
+  @keyframes goalkeeper-game-net-shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    30% {
+      transform: translateX(-0.35rem);
+    }
+
+    70% {
+      transform: translateX(0.35rem);
+    }
+  }
+</style>
