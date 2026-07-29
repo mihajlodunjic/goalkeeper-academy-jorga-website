@@ -13,7 +13,11 @@ const { currentPath, isHome = false } = Astro.props;
 const primaryPhone = business.phones[0];
 ---
 
-<header class:list={["site-header", isHome && "site-header--home"]} data-site-header>
+<header
+  class:list={["site-header", isHome && "site-header--home"]}
+  data-site-header
+  data-block-internal-nav-region
+>
   <div class="container-wide site-header__inner">
     <BrandLogo />
 

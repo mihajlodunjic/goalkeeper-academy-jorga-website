@@ -220,6 +220,18 @@ import glovesAsset from "../../assets/game/goalkeeper_gloves.png";
   }
 
   .goalkeeper-game__surface {
+    --game-origin-top: 17%;
+    --game-goal-top: 55.5%;
+    --game-goal-left: 8%;
+    --game-goal-width: 84%;
+    --game-goal-height: 35%;
+    --game-penalty-bottom: 8%;
+    --game-penalty-height: 37%;
+    --game-six-yard-bottom: 8%;
+    --game-six-yard-height: 18%;
+    --game-lane-top: 16%;
+    --game-lane-height: 32%;
+    --game-lane-width: min(20%, 8.5rem);
     position: relative;
     isolation: isolate;
     min-width: 0;
@@ -260,35 +272,35 @@ import glovesAsset from "../../assets/game/goalkeeper_gloves.png";
   }
 
   .goalkeeper-game__shooting-lane {
-    bottom: 10%;
-    width: min(58%, 25rem);
-    height: 36%;
-    border-bottom: none;
-    border-radius: 0.75rem 0.75rem 0 0;
+    top: var(--game-lane-top);
+    width: var(--game-lane-width);
+    height: var(--game-lane-height);
+    border-top: none;
+    border-radius: 0 0 0.75rem 0.75rem;
   }
 
   .goalkeeper-game__penalty-area {
-    bottom: 16%;
+    bottom: var(--game-penalty-bottom);
     width: min(76%, 35rem);
-    height: 48%;
+    height: var(--game-penalty-height);
     border-bottom: none;
     border-radius: 0.9rem 0.9rem 0 0;
   }
 
   .goalkeeper-game__six-yard-box {
-    bottom: 28%;
+    bottom: var(--game-six-yard-bottom);
     width: min(44%, 18rem);
-    height: 20%;
+    height: var(--game-six-yard-height);
     border-bottom: none;
     border-radius: 0.75rem 0.75rem 0 0;
   }
 
   .goalkeeper-game__goal {
     position: absolute;
-    top: 9%;
-    left: 8%;
-    width: 84%;
-    height: 54%;
+    top: var(--game-goal-top);
+    left: var(--game-goal-left);
+    width: var(--game-goal-width);
+    height: var(--game-goal-height);
     border-top: 0.45rem solid rgba(245, 249, 252, 0.92);
     border-left: 0.45rem solid rgba(245, 249, 252, 0.92);
     border-right: 0.45rem solid rgba(245, 249, 252, 0.92);
@@ -333,13 +345,13 @@ import glovesAsset from "../../assets/game/goalkeeper_gloves.png";
   .goalkeeper-game__shot-origin {
     position: absolute;
     left: 50%;
-    bottom: 9.5%;
+    top: var(--game-origin-top);
     width: 0.9rem;
     height: 0.9rem;
     border: 2px solid rgba(143, 200, 232, 0.52);
     border-radius: 50%;
     background: rgba(7, 21, 35, 0.88);
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     box-shadow: 0 0 0 0.35rem rgba(143, 200, 232, 0.06);
     pointer-events: none;
   }
@@ -426,11 +438,15 @@ import glovesAsset from "../../assets/game/goalkeeper_gloves.png";
   }
 
   .goalkeeper-game__overlay {
-    inset: auto 1rem 1rem;
+    top: max(1rem, calc(var(--game-goal-top) - 5.25rem));
+    left: 50%;
+    right: auto;
+    bottom: auto;
     z-index: 1;
     display: flex;
     justify-content: center;
     pointer-events: none;
+    transform: translateX(-50%);
   }
 
   .goalkeeper-game__overlay-text {
@@ -459,6 +475,18 @@ import glovesAsset from "../../assets/game/goalkeeper_gloves.png";
     }
 
     .goalkeeper-game__surface {
+      --game-origin-top: 15.5%;
+      --game-goal-top: 56.5%;
+      --game-goal-left: 10%;
+      --game-goal-width: 80%;
+      --game-goal-height: 34%;
+      --game-penalty-bottom: 8%;
+      --game-penalty-height: 35%;
+      --game-six-yard-bottom: 8%;
+      --game-six-yard-height: 17%;
+      --game-lane-top: 15%;
+      --game-lane-height: 33%;
+      --game-lane-width: min(18%, 8rem);
       height: clamp(30rem, 58vw, 35rem);
     }
   }
@@ -470,6 +498,18 @@ import glovesAsset from "../../assets/game/goalkeeper_gloves.png";
     }
 
     .goalkeeper-game__surface {
+      --game-origin-top: 14.5%;
+      --game-goal-top: 57.5%;
+      --game-goal-left: 12%;
+      --game-goal-width: 76%;
+      --game-goal-height: 33%;
+      --game-penalty-bottom: 8%;
+      --game-penalty-height: 33%;
+      --game-six-yard-bottom: 8%;
+      --game-six-yard-height: 16%;
+      --game-lane-top: 14%;
+      --game-lane-height: 34%;
+      --game-lane-width: min(16%, 7.25rem);
       height: clamp(32.5rem, 42vw, 38.75rem);
     }
   }

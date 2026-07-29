@@ -88,13 +88,16 @@ const breadcrumbStructuredData =
       <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)} />
     ) : null}
   </head>
-  <body class={bodyClass}>
+  <body class={bodyClass} data-disable-home-internal-nav={isHome ? "true" : undefined}>
     <a href="#main-content" class="skip-link">Pređi na glavni sadržaj</a>
     <SiteHeader currentPath={currentPath} isHome={isHome} />
     <main id="main-content" tabindex="-1">
       <slot />
     </main>
     <SiteFooter />
+    <script>
+      import "../scripts/disable-internal-navigation";
+    </script>
     <script>
       import "../scripts/reveal";
     </script>

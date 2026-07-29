@@ -92,6 +92,7 @@ class GoalkeeperGameController {
   private readonly controls: HTMLElement;
   private readonly surface: HTMLElement;
   private readonly goal: HTMLElement;
+  private readonly shotOrigin: HTMLElement;
   private readonly gloves: HTMLImageElement;
   private readonly ball: HTMLElement;
   private readonly impact: HTMLElement;
@@ -125,7 +126,7 @@ class GoalkeeperGameController {
   private reducedMotion = false;
   private saves = 0;
   private concededGoals = 0;
-  private gloveNormalized = { x: 0.5, y: 0.82 };
+  private gloveNormalized = { x: 0.5, y: 0.72 };
   private lastPrepDelay = 0;
 
   constructor(root: GameElement) {
@@ -133,6 +134,7 @@ class GoalkeeperGameController {
     const controls = meta?.querySelector<HTMLElement>("[data-game-controls]");
     const surface = root.querySelector<HTMLElement>("[data-game-surface]");
     const goal = root.querySelector<HTMLElement>("[data-game-goal]");
+    const shotOrigin = root.querySelector<HTMLElement>("[data-game-origin]");
     const gloves = root.querySelector<HTMLImageElement>("[data-game-gloves]");
     const ball = root.querySelector<HTMLElement>("[data-game-ball]");
     const impact = root.querySelector<HTMLElement>("[data-game-impact]");
@@ -152,6 +154,7 @@ class GoalkeeperGameController {
       !controls ||
       !surface ||
       !goal ||
+      !shotOrigin ||
       !gloves ||
       !ball ||
       !impact ||
@@ -173,6 +176,7 @@ class GoalkeeperGameController {
     this.controls = controls;
     this.surface = surface;
     this.goal = goal;
+    this.shotOrigin = shotOrigin;
     this.gloves = gloves;
     this.ball = ball;
     this.impact = impact;
@@ -431,6 +435,7 @@ class GoalkeeperGameController {
   private syncLayout(): void {
     const surfaceRect = this.surface.getBoundingClientRect();
     const goalRect = this.goal.getBoundingClientRect();
+    const shotOriginRect = this.shotOrigin.getBoundingClientRect();
     const goalLeft = goalRect.left - surfaceRect.left;
     const goalTop = goalRect.top - surfaceRect.top;
     const goalWidth = goalRect.width;
@@ -450,8 +455,8 @@ class GoalkeeperGameController {
       goalHeight,
       goalRight: goalLeft + goalWidth,
       goalBottom,
-      shotOriginX: surfaceRect.width / 2,
-      shotOriginY: surfaceHeight - clamp(surfaceHeight * 0.09, 48, 72),
+      shotOriginX: shotOriginRect.left - surfaceRect.left + shotOriginRect.width / 2,
+      shotOriginY: shotOriginRect.top - surfaceRect.top + shotOriginRect.height / 2,
       gloveWidth,
       gloveHeight,
       ballBaseRadius,
@@ -543,15 +548,11 @@ class GoalkeeperGameController {
     };
     const control = {
       x: clamp(
-        lerp(origin.x, targetX, 0.42) + randomBetween(-this.layout.goalWidth * 0.12, this.layout.goalWidth * 0.12),
+        lerp(origin.x, targetX, 0.46) + randomBetween(-this.layout.goalWidth * 0.11, this.layout.goalWidth * 0.11),
         this.layout.ballBaseRadius,
         this.layout.surfaceWidth - this.layout.ballBaseRadius
       ),
-      y: clamp(
-        lerp(origin.y, targetY, 0.42) - randomBetween(this.layout.goalHeight * 0.08, this.layout.goalHeight * 0.18),
-        this.layout.ballBaseRadius,
-        this.layout.surfaceHeight - this.layout.ballBaseRadius
-      ),
+      y: this.getControlPointY(origin.y, targetY),
     };
     const travelDuration = Math.round(randomBetween(TRAVEL_RANGE[0], TRAVEL_RANGE[1]));
     const feedbackDuration = Math.round(randomBetween(RESULT_RANGE[0], RESULT_RANGE[1]));
@@ -639,6 +640,24 @@ class GoalkeeperGameController {
 
     this.rafId = requestAnimationFrame(this.onAnimationFrame);
   };
+
+  private getControlPointY(originY: number, targetY: number): number {
+    if (!this.layout) {
+      return lerp(originY, targetY, 0.5);
+    }
+
+    const minControlY = originY + Math.max(this.layout.surfaceHeight * 0.06, 20);
+    const maxControlY = targetY - Math.max(this.layout.goalHeight * 0.08, 18);
+    const desiredY =
+      lerp(originY, targetY, 0.46) +
+      randomBetween(-this.layout.goalHeight * 0.03, this.layout.goalHeight * 0.1);
+
+    if (maxControlY <= minControlY) {
+      return clamp(desiredY, originY + 12, targetY - 12);
+    }
+
+    return clamp(desiredY, minControlY, maxControlY);
+  }
 
   private detectCollision(ballCenter: Point, ballRadius: number): boolean {
     if (!this.layout) {
