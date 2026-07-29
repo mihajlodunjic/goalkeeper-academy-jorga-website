@@ -49,17 +49,19 @@ import groupTraining from "../assets/images/camps/goalkeeper-training-group.jpg"
         </p>
       </div>
 
-      <div class="surface-panel">
-        <Picture
-          src={groupTraining}
-          alt="Golmani tokom grupnog treninga na fudbalskom terenu"
-          widths={[520, 760, 980]}
-          sizes="(min-width: 1040px) 40vw, 100vw"
-          formats={["avif", "webp"]}
-          loading="lazy"
-          decoding="async"
-          class="page-figure"
-        />
+      <div class="surface-panel page-figure-frame">
+        <div class="media-frame media-frame--landscape" style="--media-position: 50% 38%;">
+          <Picture
+            src={groupTraining}
+            alt="Trener usmerava golmana tokom individualnog rada na terenu"
+            widths={[520, 760, 980]}
+            sizes="(min-width: 1040px) 40vw, 100vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+            decoding="async"
+            class="media-cover"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -140,17 +142,19 @@ import groupTraining from "../assets/images/camps/goalkeeper-training-group.jpg"
         </ol>
       </div>
 
-      <div class="surface-panel surface-panel--dark">
-        <Picture
-          src={heroImage}
-          alt="Golman u odbrani tokom treninga na fudbalskom terenu"
-          widths={[520, 760, 980]}
-          sizes="(min-width: 1040px) 40vw, 100vw"
-          formats={["avif", "webp"]}
-          loading="lazy"
-          decoding="async"
-          class="page-figure"
-        />
+      <div class="surface-panel surface-panel--dark page-figure-frame">
+        <div class="media-frame media-frame--landscape" style="--media-position: 50% 42%;">
+          <Picture
+            src={heroImage}
+            alt="Golman u odbrani tokom treninga na fudbalskom terenu"
+            widths={[520, 760, 980]}
+            sizes="(min-width: 1040px) 40vw, 100vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+            decoding="async"
+            class="media-cover"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -187,11 +191,8 @@ import groupTraining from "../assets/images/camps/goalkeeper-training-group.jpg"
 </BaseLayout>
 
 <style>
-  .page-figure {
-    width: 100%;
-    border-radius: var(--radius-sharp);
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+  .page-figure-frame {
+    padding: 0.9rem;
   }
 
   .program-sections {
@@ -217,6 +218,7 @@ import groupTraining from "../assets/images/camps/goalkeeper-training-group.jpg"
   .program-section__body {
     display: grid;
     gap: 1rem;
+    min-width: 0;
     color: var(--color-text-muted);
   }
 

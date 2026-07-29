@@ -6,7 +6,7 @@ export const campsData = {
       "Izdvojen period rada donosi više vremena za tehniku, situacione zadatke, fizičku pripremu, analizu i iskustvo grupe koja deli istu poziciju.",
     primaryCta: "Pošalji upit za kamp",
     secondaryCta: "Otvori aktuelne objave",
-    alt: "Golmani tokom grupnog treninga na fudbalskom terenu",
+    alt: "Trener i golman tokom individualnog rada na terenu",
   },
   home: {
     eyebrow: "Golmanski kampovi",
@@ -19,7 +19,7 @@ export const campsData = {
       "Grupa koja deli istu poziciju i njene zahteve",
     ],
     cta: "Pogledaj kako funkcionišu kampovi",
-    alt: "Grupa golmana tokom treninga na golmanskom kampu",
+    alt: "Trener i golman tokom individualnog rada na terenu",
   },
   rhythm: {
     eyebrow: "Intenzivan blok rada",

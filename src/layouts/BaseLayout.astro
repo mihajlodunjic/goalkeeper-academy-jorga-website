@@ -83,9 +83,6 @@ const breadcrumbStructuredData =
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <script is:inline>
-      document.documentElement.classList.add("js");
-    </script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationStructuredData)} />
     {breadcrumbStructuredData ? (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)} />
@@ -98,6 +95,9 @@ const breadcrumbStructuredData =
       <slot />
     </main>
     <SiteFooter />
+    <script>
+      import "../scripts/reveal";
+    </script>
   </body>
 </html>
 

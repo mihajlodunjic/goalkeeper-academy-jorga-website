@@ -13,13 +13,13 @@ export type PhotoCredit = {
 export const photoCredits: PhotoCredit[] = [
   {
     file: "src/assets/images/home/hero-goalkeeper.jpg",
-    title: "Focused goalkeeper during a training session at a sunny outdoor soccer field.",
-    author: "Franco Monsalvo",
-    sourceUrl: "https://www.pexels.com/photo/goalkeeper-training-session-in-action-35779800/",
+    title: "Goalkeeper training on outdoor soccer field with green grass and empty stands.",
+    author: "Володимир Король",
+    sourceUrl: "https://www.pexels.com/photo/goalkeeper-training-with-soccer-ball-16543177/",
     licenseName: "Pexels License",
     licenseUrl: "https://www.pexels.com/license/",
     downloadDate: "2026-07-28",
-    changes: "Lokalno preuzimanje, responsive optimizacija, odvojeni mobilni crop.",
+    changes: "Lokalno preuzimanje, desktop crop 16/10, odvojeni mobilni crop 4/5 i responsive optimizacija.",
     requiresPublicAttribution: false,
   },
   {
@@ -57,14 +57,15 @@ export const photoCredits: PhotoCredit[] = [
   },
   {
     file: "src/assets/images/camps/goalkeeper-training-group.jpg",
-    title: "Goalkeeper training.jpg",
-    author: "Lutwamastevenkigongo",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:Goalkeeper_training.jpg",
-    licenseName: "CC BY 4.0",
-    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    title: "Goalkeeper drill with coach on outdoor soccer field.",
+    author: "Володимир Король",
+    sourceUrl:
+      "https://images.pexels.com/photos/16543167/pexels-photo-16543167.jpeg?cs=srgb&dl=pexels-535150482-16543167.jpg&fm=jpg",
+    licenseName: "Pexels License",
+    licenseUrl: "https://www.pexels.com/license/",
     downloadDate: "2026-07-28",
-    changes: "Lokalno preuzimanje preko Wikimedia redirect linka, responsive optimizacija i odvojeni mobilni crop za kamp/metod sekcije.",
-    requiresPublicAttribution: true,
+    changes: "Lokalno preuzimanje, desktop crop 4/3, odvojeni mobilni crop 4/5 i responsive optimizacija za kamp/metod sekcije.",
+    requiresPublicAttribution: false,
   },
 ];
 

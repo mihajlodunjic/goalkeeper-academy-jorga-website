@@ -8,16 +8,18 @@ import trainingGrid from "../../assets/images/camps/training-grid.jpg";
 <section class="section section--dark">
   <div class="container-wide camp-feature split-grid">
     <div class="camp-feature__media reveal">
-      <Picture
-        src={trainingGrid}
-        alt="Priprema terena za golmanski trening i rad sa koordinacionim lestvama"
-        widths={[500, 760, 980]}
-        sizes="(min-width: 1040px) 44vw, 100vw"
-        formats={["avif", "webp"]}
-        loading="lazy"
-        decoding="async"
-        class="camp-feature__image"
-      />
+      <div class="media-frame media-frame--camp" style="--media-position: center 56%;">
+        <Picture
+          src={trainingGrid}
+          alt="Priprema terena za golmanski trening i rad sa koordinacionim lestvama"
+          widths={[500, 760, 980]}
+          sizes="(min-width: 1040px) 44vw, 100vw"
+          formats={["avif", "webp"]}
+          loading="lazy"
+          decoding="async"
+          class="media-cover"
+        />
+      </div>
     </div>
 
     <div class="camp-feature__copy flow reveal">
@@ -35,11 +37,9 @@ import trainingGrid from "../../assets/images/camps/training-grid.jpg";
 </section>
 
 <style>
-  .camp-feature__image {
-    width: 100%;
-    border-radius: var(--radius-sharp);
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+  .camp-feature__media,
+  .camp-feature__copy {
+    min-width: 0;
   }
 
   .camp-feature ul {

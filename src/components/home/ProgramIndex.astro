@@ -18,16 +18,18 @@ import programSave from "../../assets/images/programs/program-save.jpg";
 
     <div class="program-index__binder reveal">
       <div class="program-index__preview desktop-only">
-        <Picture
-          src={programSave}
-          alt="Golman tokom specijalizovane vežbe odbrane na treningu"
-          widths={[420, 640, 900]}
-          sizes="(min-width: 1040px) 28vw, 100vw"
-          formats={["avif", "webp"]}
-          loading="lazy"
-          decoding="async"
-          class="program-index__preview-image"
-        />
+        <div class="media-frame media-frame--landscape" style="--media-position: 48% 44%;">
+          <Picture
+            src={programSave}
+            alt="Golman tokom specijalizovane vežbe odbrane na treningu"
+            widths={[420, 640, 900]}
+            sizes="(min-width: 1040px) 28vw, 100vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+            decoding="async"
+            class="media-cover"
+          />
+        </div>
         <p class="program-index__preview-note">Format rada bira se prema iskustvu, cilju i obavezama na terenu.</p>
       </div>
 
@@ -44,16 +46,18 @@ import programSave from "../../assets/images/programs/program-save.jpg";
             <div class="program-index__content">
               <p>{program.summary}</p>
               <a href={`/programi#${program.slug}`}>{program.linkLabel}</a>
-              <Picture
-                src={programSave}
-                alt="Golman tokom specijalizovane vežbe odbrane na treningu"
-                widths={[540, 760]}
-                sizes="100vw"
-                formats={["avif", "webp"]}
-                loading="lazy"
-                decoding="async"
-                class="program-index__mobile-image mobile-only"
-              />
+              <div class="media-frame media-frame--landscape mobile-only" style="--media-position: 48% 44%;">
+                <Picture
+                  src={programSave}
+                  alt="Golman tokom specijalizovane vežbe odbrane na treningu"
+                  widths={[540, 760]}
+                  sizes="100vw"
+                  formats={["avif", "webp"]}
+                  loading="lazy"
+                  decoding="async"
+                  class="media-cover"
+                />
+              </div>
             </div>
           </details>
         ))}
@@ -70,23 +74,17 @@ import programSave from "../../assets/images/programs/program-save.jpg";
   .program-index__binder {
     display: grid;
     gap: 1.4rem;
+    min-width: 0;
   }
 
   .program-index__preview {
     position: relative;
-    min-height: 19rem;
+    min-height: 0;
     padding: 1rem;
     border: 1px solid var(--color-border-light);
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-panel);
     background: var(--color-ink-950);
     color: var(--color-white);
-  }
-
-  .program-index__preview-image {
-    width: 100%;
-    border-radius: calc(var(--radius-sharp) - 0.1rem);
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
   }
 
   .program-index__preview-note {
@@ -108,7 +106,7 @@ import programSave from "../../assets/images/programs/program-save.jpg";
 
   .program-index__row {
     border: 1px solid var(--color-border-light);
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-detail);
     background: rgba(255, 255, 255, 0.76);
     overflow: hidden;
   }
@@ -159,6 +157,7 @@ import programSave from "../../assets/images/programs/program-save.jpg";
     display: grid;
     gap: 1rem;
     padding: 0 1rem 1rem 5rem;
+    min-width: 0;
     color: var(--color-text-muted);
   }
 
@@ -166,12 +165,6 @@ import programSave from "../../assets/images/programs/program-save.jpg";
     justify-self: start;
     color: var(--color-ink-950);
     font-weight: 700;
-  }
-
-  .program-index__mobile-image {
-    border-radius: var(--radius-sharp);
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
   }
 
   @media (min-width: 1040px) {

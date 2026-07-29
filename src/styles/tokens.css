@@ -22,6 +22,11 @@
   --header-height: 5.5rem;
   --header-height-mobile: 4.5rem;
   --radius-soft: 1rem;
+  --radius-panel: 0.9rem;
+  --radius-media: 1rem;
+  --radius-detail: 0.72rem;
+  --radius-control: 0.6rem;
+  --radius-sheet: 1rem;
   --radius-sharp: 0.35rem;
   --shadow-panel: 0 1.4rem 3rem rgba(7, 21, 35, 0.14);
   --section-space: clamp(4rem, 5vw, 7.25rem);

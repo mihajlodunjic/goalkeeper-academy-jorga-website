@@ -35,7 +35,7 @@ import { business } from "../../data/business";
     <div class="home-hero__visual reveal">
       <PenaltyAreaLines className="home-hero__lines" />
       <div class="home-hero__frame">
-        <div class="desktop-only">
+        <div class="desktop-only media-frame media-frame--hero" style="--media-position: 50% 42%;">
           <Picture
             src={heroImage}
             alt="Golman u odbrani tokom treninga na fudbalskom terenu"
@@ -45,10 +45,10 @@ import { business } from "../../data/business";
             loading="eager"
             decoding="async"
             fetchpriority="high"
-            class="home-hero__photo"
+            class="media-cover"
           />
         </div>
-        <div class="mobile-only">
+        <div class="mobile-only media-frame media-frame--hero-mobile" style="--media-position: 56% 34%;">
           <Picture
             src={heroMobileImage}
             alt="Golman u odbrani tokom treninga na fudbalskom terenu"
@@ -58,7 +58,7 @@ import { business } from "../../data/business";
             loading="eager"
             decoding="async"
             fetchpriority="high"
-            class="home-hero__photo"
+            class="media-cover"
           />
         </div>
         <FocusMarker className="home-hero__marker" label="Odluka" note="Zona reakcije" />
@@ -90,6 +90,8 @@ import { business } from "../../data/business";
     display: grid;
     gap: 2rem;
     align-items: center;
+    min-width: 0;
+    min-height: 0;
   }
 
   .home-hero__copy {
@@ -130,22 +132,15 @@ import { business } from "../../data/business";
 
   .home-hero__visual {
     position: relative;
+    min-width: 0;
+    min-height: 0;
   }
 
   .home-hero__frame {
     position: relative;
-    min-height: 22rem;
+    min-height: 0;
     border-left: 1px solid rgba(143, 200, 232, 0.22);
     padding-left: clamp(1rem, 2.6vw, 2rem);
-  }
-
-  .home-hero__photo {
-    width: 100%;
-    border-radius: var(--radius-sharp);
-    aspect-ratio: 5 / 4;
-    object-fit: cover;
-    object-position: center center;
-    background: rgba(12, 30, 50, 0.4);
   }
 
   .home-hero__marker {
@@ -183,7 +178,7 @@ import { business } from "../../data/business";
   @media (min-width: 1040px) {
     .home-hero__grid {
       grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-      min-height: min(56rem, calc(100svh - var(--header-height)));
+      min-height: clamp(42.5rem, calc(100svh - var(--header-height) - 1rem), 52rem);
     }
 
     .home-hero__copy {
@@ -197,6 +192,13 @@ import { business } from "../../data/business";
 
     .home-hero__meta li {
       border-bottom: none;
+    }
+  }
+
+  @media (max-width: 1039px) {
+    .home-hero__frame {
+      padding-left: 0;
+      border-left: none;
     }
   }
 </style>

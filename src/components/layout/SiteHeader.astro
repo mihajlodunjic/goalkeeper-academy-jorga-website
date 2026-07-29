@@ -181,19 +181,20 @@ const primaryPhone = business.phones[0];
     top: 0;
     z-index: 1200;
     border-bottom: 1px solid transparent;
-    background: rgba(7, 21, 35, 0.98);
+    background: rgba(7, 21, 35, 0.96);
     transition:
       background-color var(--transition-medium),
       border-color var(--transition-medium);
   }
 
   .site-header--home {
-    background: transparent;
+    background: rgba(7, 21, 35, 0.92);
+    border-color: rgba(143, 200, 232, 0.1);
   }
 
   .site-header.is-scrolled {
     border-color: rgba(143, 200, 232, 0.16);
-    background: rgba(7, 21, 35, 0.97);
+    background: rgba(7, 21, 35, 0.98);
   }
 
   .site-header__inner {
@@ -219,6 +220,15 @@ const primaryPhone = business.phones[0];
     font-weight: 600;
   }
 
+  .site-header__nav a {
+    padding-block: 0.4rem;
+  }
+
+  .site-header__nav a:hover,
+  .site-header__panel a:hover {
+    color: var(--color-blue-300);
+  }
+
   .site-header__nav a[aria-current="page"],
   .site-header__panel a[aria-current="page"] {
     padding-bottom: 0.2rem;
@@ -229,6 +239,11 @@ const primaryPhone = business.phones[0];
   .site-header__overlay,
   .site-header__panel {
     display: none;
+  }
+
+  .site-header__overlay[hidden],
+  .site-header__panel[hidden] {
+    display: none !important;
   }
 
   @media (max-width: 1023px) {
@@ -298,6 +313,7 @@ const primaryPhone = business.phones[0];
       background: var(--color-ink-950);
       color: var(--color-white);
       border-left: 1px solid rgba(143, 200, 232, 0.18);
+      border-radius: var(--radius-sheet) 0 0 var(--radius-sheet);
     }
 
     .site-header__panel ul {

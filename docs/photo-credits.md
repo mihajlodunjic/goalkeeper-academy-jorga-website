@@ -3,13 +3,13 @@
 ## Spoljne fotografije korišćene na sajtu
 
 1. `src/assets/images/home/hero-goalkeeper.jpg`
-   - Naslov: Focused goalkeeper during a training session at a sunny outdoor soccer field.
-   - Autor: Franco Monsalvo
-   - Izvor: https://www.pexels.com/photo/goalkeeper-training-session-in-action-35779800/
+   - Naslov: Goalkeeper training on outdoor soccer field with green grass and empty stands.
+   - Autor: Володимир Король
+   - Izvor: https://www.pexels.com/photo/goalkeeper-training-with-soccer-ball-16543177/
    - Licenca: Pexels License
    - Link licence: https://www.pexels.com/license/
    - Datum preuzimanja: 2026-07-28
-   - Izmene: lokalno preuzimanje, responsive optimizacija, odvojeni mobilni crop.
+   - Izmene: lokalno preuzimanje, desktop crop 16/10, odvojeni mobilni crop 4/5, responsive optimizacija.
 
 2. `src/assets/images/programs/program-save.jpg`
    - Naslov: Goalkeeper skillfully defending the goal during a sunny outdoor soccer training session.
@@ -39,10 +39,10 @@
    - Izmene: lokalno preuzimanje, responsive optimizacija, korišćenje kao ilustracija pripreme prostora za rad.
 
 5. `src/assets/images/camps/goalkeeper-training-group.jpg`
-   - Naslov: Goalkeeper training.jpg
-   - Autor: Lutwamastevenkigongo
-   - Izvor: https://commons.wikimedia.org/wiki/File:Goalkeeper_training.jpg
-   - Licenca: CC BY 4.0
-   - Link licence: https://creativecommons.org/licenses/by/4.0/
+   - Naslov: Goalkeeper drill with coach on outdoor soccer field.
+   - Autor: Володимир Король
+   - Izvor: https://images.pexels.com/photos/16543167/pexels-photo-16543167.jpeg?cs=srgb&dl=pexels-535150482-16543167.jpg&fm=jpg
+   - Licenca: Pexels License
+   - Link licence: https://www.pexels.com/license/
    - Datum preuzimanja: 2026-07-28
-   - Izmene: lokalno preuzimanje preko Wikimedia redirect linka, responsive optimizacija i odvojeni mobilni crop za kamp/metod sekcije.
+   - Izmene: lokalno preuzimanje, desktop crop 4/3, odvojeni mobilni crop 4/5 i responsive optimizacija za kamp/metod sekcije.

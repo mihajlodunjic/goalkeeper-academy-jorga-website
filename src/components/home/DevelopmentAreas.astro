@@ -25,16 +25,18 @@ import legsImage from "../../assets/images/academy/goalkeeper-legs.jpg";
       </div>
 
       <div class="areas-layout__side">
-        <Picture
-          src={legsImage}
-          alt="Golman tokom pripreme i rada u golmanskoj opremi"
-          widths={[360, 540, 720]}
-          sizes="(min-width: 1040px) 20vw, 100vw"
-          formats={["avif", "webp"]}
-          loading="lazy"
-          decoding="async"
-          class="areas-layout__image"
-        />
+        <div class="media-frame media-frame--portrait" style="--media-position: center 38%;">
+          <Picture
+            src={legsImage}
+            alt="Golman tokom pripreme i rada u golmanskoj opremi"
+            widths={[360, 540, 720]}
+            sizes="(min-width: 1040px) 20vw, 100vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+            decoding="async"
+            class="media-cover"
+          />
+        </div>
 
         <div class="areas-layout__stack">
           {developmentAreas.areas.slice(3).map((area) => (
@@ -58,6 +60,7 @@ import legsImage from "../../assets/images/academy/goalkeeper-legs.jpg";
   .areas-layout__content {
     display: grid;
     gap: 1.2rem;
+    min-width: 0;
   }
 
   .areas-layout__lead-areas,
@@ -82,13 +85,7 @@ import legsImage from "../../assets/images/academy/goalkeeper-legs.jpg";
   .areas-layout__side {
     display: grid;
     gap: 1rem;
-  }
-
-  .areas-layout__image {
-    width: 100%;
-    border-radius: var(--radius-sharp);
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+    min-width: 0;
   }
 
   @media (min-width: 1040px) {

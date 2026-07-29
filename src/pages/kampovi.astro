@@ -52,28 +52,32 @@ import trainingGrid from "../assets/images/camps/training-grid.jpg";
       </div>
 
       <div class="desktop-only">
-        <Picture
-          src={groupTraining}
-          alt={campsData.pageHero.alt}
-          widths={[560, 760, 980, 1200]}
-          sizes="(min-width: 1040px) 42vw, 100vw"
-          formats={["avif", "webp"]}
-          loading="lazy"
-          decoding="async"
-          class="page-figure"
-        />
+        <div class="media-frame media-frame--landscape" style="--media-position: 50% 38%;">
+          <Picture
+            src={groupTraining}
+            alt={campsData.pageHero.alt}
+            widths={[560, 760, 980, 1200]}
+            sizes="(min-width: 1040px) 42vw, 100vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+            decoding="async"
+            class="media-cover"
+          />
+        </div>
       </div>
       <div class="mobile-only">
-        <Picture
-          src={groupTrainingMobile}
-          alt={campsData.pageHero.alt}
-          widths={[420, 560, 760, 900]}
-          sizes="100vw"
-          formats={["avif", "webp"]}
-          loading="lazy"
-          decoding="async"
-          class="page-figure page-figure--portrait"
-        />
+        <div class="media-frame media-frame--portrait" style="--media-position: 50% 24%;">
+          <Picture
+            src={groupTrainingMobile}
+            alt={campsData.pageHero.alt}
+            widths={[420, 560, 760, 900]}
+            sizes="100vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+            decoding="async"
+            class="media-cover"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -92,16 +96,18 @@ import trainingGrid from "../assets/images/camps/training-grid.jpg";
         <p class="muted">{campsData.scope.note}</p>
       </div>
 
-      <Picture
-        src={trainingGrid}
-        alt="Priprema terena za golmanski trening i rad sa koordinacionim lestvama"
-        widths={[500, 760, 980]}
-        sizes="(min-width: 1040px) 40vw, 100vw"
-        formats={["avif", "webp"]}
-        loading="lazy"
-        decoding="async"
-        class="page-figure page-figure--portrait"
-      />
+      <div class="media-frame media-frame--portrait-tight" style="--media-position: center 56%;">
+        <Picture
+          src={trainingGrid}
+          alt="Priprema terena za golmanski trening i rad sa koordinacionim lestvama"
+          widths={[500, 760, 980]}
+          sizes="(min-width: 1040px) 40vw, 100vw"
+          formats={["avif", "webp"]}
+          loading="lazy"
+          decoding="async"
+          class="media-cover"
+        />
+      </div>
     </div>
   </section>
 
@@ -149,17 +155,6 @@ import trainingGrid from "../assets/images/camps/training-grid.jpg";
 </BaseLayout>
 
 <style>
-  .page-figure {
-    width: 100%;
-    border-radius: var(--radius-sharp);
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-  }
-
-  .page-figure--portrait {
-    aspect-ratio: 4 / 5;
-  }
-
   .page-card {
     padding: 1rem;
   }

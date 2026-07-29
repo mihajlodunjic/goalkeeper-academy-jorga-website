@@ -34,28 +34,28 @@ import groupTrainingMobile from "../../assets/images/camps/goalkeeper-training-g
       </ol>
 
       <div class="method-section__media reveal">
-        <div class="desktop-only">
+        <div class="desktop-only media-frame media-frame--portrait-tight" style="--media-position: 50% 34%;">
           <Picture
             src={groupTraining}
-            alt="Golmani tokom grupnog treninga na fudbalskom terenu"
+            alt="Trener usmerava golmana tokom individualnog rada na terenu"
             widths={[500, 760, 980]}
             sizes="(min-width: 1040px) 28vw, 100vw"
             formats={["avif", "webp"]}
             loading="lazy"
             decoding="async"
-            class="method-section__image"
+            class="media-cover"
           />
         </div>
-        <div class="mobile-only">
+        <div class="mobile-only media-frame media-frame--portrait" style="--media-position: 50% 26%;">
           <Picture
             src={groupTrainingMobile}
-            alt="Golmani tokom grupnog treninga na fudbalskom terenu"
+            alt="Trener usmerava golmana tokom individualnog rada na terenu"
             widths={[420, 560, 760, 900]}
             sizes="100vw"
             formats={["avif", "webp"]}
             loading="lazy"
             decoding="async"
-            class="method-section__image"
+            class="media-cover"
           />
         </div>
       </div>
@@ -72,6 +72,7 @@ import groupTrainingMobile from "../../assets/images/camps/goalkeeper-training-g
   .method-section__layout {
     display: grid;
     gap: 1.5rem;
+    min-width: 0;
   }
 
   .method-section__note {
@@ -100,6 +101,7 @@ import groupTrainingMobile from "../../assets/images/camps/goalkeeper-training-g
     display: grid;
     gap: 1rem;
     list-style: none;
+    min-width: 0;
   }
 
   .method-section__steps li {
@@ -108,7 +110,7 @@ import groupTrainingMobile from "../../assets/images/camps/goalkeeper-training-g
     gap: 1rem;
     padding: 1rem;
     border: 1px solid rgba(143, 200, 232, 0.2);
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-detail);
     background: rgba(12, 30, 50, 0.72);
   }
 
@@ -129,11 +131,9 @@ import groupTrainingMobile from "../../assets/images/camps/goalkeeper-training-g
     color: rgba(255, 255, 255, 0.78);
   }
 
-  .method-section__image {
-    width: 100%;
-    border-radius: var(--radius-sharp);
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+  .method-section__media {
+    min-width: 0;
+    min-height: 0;
   }
 
   @media (min-width: 1040px) {
